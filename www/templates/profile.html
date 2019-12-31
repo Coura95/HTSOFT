@@ -1,0 +1,33 @@
+<ion-view view-title="Modifier mot de passe">
+        <ion-pane>
+          <div ng-app="starter" >
+ 
+            <ion-content padding="true" overflow-scroll="false">
+                <form ng-submit="submit()">
+         <div class="spacer" style="height: 10px;"></div>
+
+
+<label class="item item-input item-stacked-label">
+                        <span class="input-label">Mot de passe actuel </span>
+                        <input type="text" name="passwordf" placeholder="Entrer password" ng-model="data.passwordf">
+                    </label>
+
+                    <label class="item item-input item-stacked-label">
+                        <span class="input-label">Nouveau Mot de passe </span>
+                        <input type="text" name="passwordf" placeholder="Entrer nouveau password" ng-model="data.passwordf">
+                    </label>
+
+                     <label class="item item-input item-stacked-label">
+                        <span class="input-label">Répéter Nouveau Mot de passe</span>
+                        <input type="text" name="passwords" placeholder="Répéter nouveau mot de passe" ng-model="data.passwords">
+                    </label>
+          <div class="spacer" style="height: 10px;"></div>
+
+                    <input class="button button-block button-positive" type="submit" name="submit" value="Modifier">                    
+                </form>
+ 
+                
+            </ion-content>
+        </ion-pane>
+      </div> 
+</ion-view>

@@ -1,0 +1,28 @@
+<ion-view title="Login" hide-nav-bar="true" cache-view="false">
+  <div ng-app="starter" ng-controller="LoginCtrl">
+    <ion-content padding="'true'" class="has-header" overflow-scroll="false">
+      <h2 style="text-align:center">{{ 'title_connexion' | translate }}</h2>
+      <form class="list" >
+        <div class="spacer" style="height: 20px;"></div>
+
+        <ion-list>
+          <label class="item item-input">
+            <span class="input-label">{{ 'label_login' | translate }}</span>
+            <input ng-model="user.login" type="text" placeholder="{{ 'placeholder_login' | translate }}" focus>
+          </label>
+        </ion-list>
+        <br>
+        <ion-list>
+          <label class="item item-input">
+            <span class="input-label">{{ 'label_password' | translate }} </span>
+            <input type="password" name="uPassword" minlength="3" placeholder="{{ 'placeholder_password' | translate }}" ng-model="user.password" ui-show-password required>
+          </label>
+        </ion-list>
+        <div class="spacer" style="height: 20px;"></div>
+        <button class="button button-block button-positive" ng-click="login()" color="primary" type="submit" name="submit">
+          <span style="color:white">{{ 'btn_conn' | translate }}</span>
+        </button>
+      </form>
+    </ion-content>
+  </div>
+</ion-view>

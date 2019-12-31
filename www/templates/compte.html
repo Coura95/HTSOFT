@@ -1,0 +1,32 @@
+<ion-view title="{{ 'compte_header_page' | translate }}">
+  <ion-content padding="'true'" class="has-header" overflow-scroll="false">
+    <h4 style="text-align:center">{{ 'label_apropos' | translate }}</h4>
+    <ion-item ng-show="scroll">
+      <a href="#/app/signup" class="button button-block button-positive" color="dark">
+        {{ 'label_change_mpd' | translate }}
+      </a>
+    </ion-item>
+
+    <h4 style="text-align:center">{{ 'label_language' | translate }}</h4>
+    <ion-item>
+      <div class="list" ng-app="starter" ng-controller="AccountCtrl">
+        <ion-item>
+          <ion-radio ng-model="choice" ng-value="'en-US'" ng-click="changeLanguage('en')">{{ 'lang_en' | translate }}
+          </ion-radio>
+          <img style="float: right" src="./img/en.png" >
+        </ion-item>
+        <ion-item>
+          <ion-radio ng-model="choice" ng-value="'hi-IN'" ng-click="changeLanguage('hi')">{{ 'lang_hi' | translate }}
+          </ion-radio>
+          <img style="float: right" src="./img/fr.png" >
+        </ion-item>
+        <ion-item>
+          <ion-radio ng-model="choice" ng-value="'pr'" ng-click="changeLanguage('pr')">{{ 'lang_pr' | translate }}
+          </ion-radio>
+          <img style="float: right" src="./img/pr.png" >
+        </ion-item>
+      </div>
+    </ion-item>
+
+  </ion-content>
+</ion-view>

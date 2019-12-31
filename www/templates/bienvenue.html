@@ -1,0 +1,32 @@
+<ion-view view-title="{{ 'acceuil_header' | translate }}" cache-view="false">
+  <ion-pane>
+    <div ng-app="starter">
+      <ion-content>
+        <style type="text/css">
+          input[readonly] {
+            background-color: transparent !important;
+            cursor: not-allowed;
+          }
+
+        </style>
+        <!--   <form ng-submit="submit()" method="post" enctype="multipart/form-data"> -->
+        <div class="row" style="text-align: center;padding-left: 10%;padding-top: 15%">
+          <img src="./img/LogoYUP.png" style="width:90%; height: 50%;">
+        </div>
+        <div class="row" style="text-align: center;padding-left: 10%;padding-top: 5%"><h1 style="text-align: center;font-size: 200%;color: crimson;"><b>{{ 'texte_bienvenu' | translate }}</b></h1></div>
+
+        <!--   </form> -->
+        <br/>
+        <br/>
+        <br/>
+        <ion-footer >
+          <div style="text-align: center"> 
+          <p >
+            <b>  {{ 'label_version' | translate }} Test-1.2.13 </b>
+          </p>
+          </div>
+          </ion-footer>
+      </ion-content>
+    </div>
+  </ion-pane>
+</ion-view>

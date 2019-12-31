@@ -1,0 +1,292 @@
+<ion-view view-title="{{ 'fichevisite_header_page' | translate }}" cache-view="false">
+  <ion-pane>
+    <div ng-app="starter">
+      <ion-content>
+        <style type="text/css">
+          input[readonly] {
+            background-color: transparent !important;
+            cursor: not-allowed;
+          }
+
+        </style>
+     <!--   <form ng-submit="submit()" method="post" enctype="multipart/form-data"> -->
+
+        <!--Test                                -->
+        <div class="item item-body"  ng-if="data.listpays!=null">
+          <button class="button button-block button-dark"
+          cancel-button="{{ 'fichevisite_select_pv_return' | translate }}"
+          reset-button="{{ 'fichevisite_select_pv_cancel' | translate }}"
+          cancel-search-button="{{ 'fichevisite_select_pv_clear' | translate }}"
+          search-placeholder="{{ 'fichevisite_select_pv_search' | translate }}"
+          modal-select=""
+           
+          ng-model="data.payschoisit" 
+          on-select="listpointdevnte()"
+          options="data.listpays"
+          modal-button-left="{{ 'fichevisite_select_pv_return' | translate }}"
+          option-getter="getOptPays(option)"
+          modal-title="Selection" 
+          has-search="true">
+            {{ 'label_choix_pays' | translate }}
+            <div class="option">
+              <h2>{{option.name}}</h2>
+            </div>
+            
+          </button>
+        </div>
+       <!-- Pays offline-->
+        <div class="item item-body"  ng-if="listpayoffline!=null">
+          <button class="button button-block button-dark"
+          cancel-button="{{ 'fichevisite_select_pv_return' | translate }}"
+          reset-button="{{ 'fichevisite_select_pv_cancel' | translate }}"
+          cancel-search-button="{{ 'fichevisite_select_pv_clear' | translate }}"
+          search-placeholder="{{ 'fichevisite_select_pv_search' | translate }}"
+          modal-select="" 
+          ng-model="data.payschoisioffline" 
+          options="listpayoffline"
+          on-select="listpointdevnteoffline()"
+          modal-button-left="{{ 'fichevisite_select_pv_return' | translate }}"
+          option-getter="getOptPays(option)"
+            modal-title="Selection" 
+            has-search="true">
+            {{ 'label_choix_pays' | translate }}
+            <div class="option">
+              <h2>{{option.name}}</h2>
+
+            </div>
+
+          </button>
+        </div>
+
+        
+        <div ng-if="offline==null" class="item" style="color: #222222;font-weight: bolder">
+          {{ 'label_pays' | translate }} : <b style="color: blue" ng-if="data.payschoisit!=null">{{data.payschoisit.name}}</b>
+        </div>
+        <!-- Pays offline-->
+        <div ng-if="offline!=null" class="item" style="color: #222222;font-weight: bolder">
+          {{ 'label_pays' | translate }} : <b style="color: blue" ng-if="payschoisioffline!=null">{{payschoisioffline.name}}</b>
+        </div>
+
+        <div class="item item-body" ng-if="data.payschoisit!=null">
+          <button  class="button button-block button-dark"
+            cancel-button="{{ 'fichevisite_select_pv_return' | translate }}"
+            reset-button="{{ 'fichevisite_select_pv_cancel' | translate }}"
+            cancel-search-button="{{ 'fichevisite_select_pv_clear' | translate }}"
+            search-placeholder="{{ 'fichevisite_select_pv_search' | translate }}" 
+            modal-select=""
+            ng-model="data.pvchoisit" 
+            options="selectableNames"
+            option-getter="getOpt(option)"
+            modal-button-left="{{ 'fichevisite_select_pv_return' | translate }}"
+            modal-button-right="reinitialiser"
+            modal-title="Selection"
+            has-search="true">
+            {{ 'fichevisite_choixpoint' | translate }}
+            <div class="option">
+              <h2>{{option.name}}</h2>
+              <p>{{option.code}}</p>
+
+            </div>
+
+          </button>
+        </div>
+        <!-- Point de vente offline-->
+        <div class="item item-body" ng-if="payschoisioffline!=null">
+          <button  class="button button-block button-dark"
+            cancel-button="{{ 'fichevisite_select_pv_return' | translate }}"
+            reset-button="{{ 'fichevisite_select_pv_cancel' | translate }}"
+            cancel-search-button="{{ 'fichevisite_select_pv_clear' | translate }}"
+            search-placeholder="{{ 'fichevisite_select_pv_search' | translate }}" 
+            modal-select=""
+            ng-model="data.pvchoisit" 
+            options="selectableNames"
+            option-getter="getOpt(option)"
+            modal-button-left="{{ 'fichevisite_select_pv_return' | translate }}"
+            modal-button-right="reinitialiser"
+            modal-title="Selection"
+            has-search="true">
+            {{ 'fichevisite_choixpoint' | translate }}
+            <div class="option">
+              <h2>{{option.name}}</h2>
+              <p>{{option.code}}</p>
+
+            </div>
+
+          </button>
+        </div>
+        
+        <div ng-if="data.pvchoisit!=null" class="item" style="color: #222222;font-weight: bolder">
+          {{ 'fichevisite_pvchoisit' | translate }}<b style="color: blue">{{data.pvchoisit.name}}</b><br/>
+          {{ 'fichevisite_codepv' | translate }}<b style="color: blue">{{data.pvchoisit.code}}</b>
+        </div>
+        <!-- Point de vente offline-->
+        <!--<div ng-if="payschoisioffline!=null" class="item" style="color: #222222;font-weight: bolder">
+          {{ 'fichevisite_pvchoisit' | translate }}<b style="color: blue">{{data.pvchoisitoffline.name}}</b><br/>
+          {{ 'fichevisite_codepv' | translate }}<b style="color: blue">{{data.pvchoisitoffline.code}}</b>
+        </div>-->
+        <!--Test                                -->
+        <!--Test                                -->
+        <!--Test                                -->
+
+          <ul class="list">
+            <li class="item item-checkbox checkbox-light">
+              {{ 'fichevisite_enseigneyup' | translate }} <label class="checkbox">
+                <input type="checkbox" name="photoPoint" value="ok" ng-model="data.photoPoint" />
+              </label>
+            </li>
+
+            <li class="item item-checkbox checkbox-stable">
+              {{ 'fichevisite_brandingext' | translate }}
+              <label class="checkbox">
+                <input type="checkbox" name="brandingExterieur" value="ok" ng-model="data.brandingExterieur" />
+              </label>
+            </li>
+
+            <li class="item item-checkbox  checkbox-positive">
+              {{ 'fichevisite_brandingint' | translate }}
+              <label class="checkbox">
+                <input type="checkbox" name="brandingInterieur" value="ok" ng-model="data.brandingInterieur" />
+              </label>
+            </li>
+
+            <li class="item item-checkbox  checkbox-calm">
+              {{ 'fichevisite_grilletarif' | translate }}
+              <label class="checkbox">
+                <input type="checkbox" name="grilleTarifVisible" value="ok" ng-model="data.grilleTarifVisible" />
+              </label>
+            </li>
+
+            <li class="item item-checkbox  checkbox-balanced">
+              {{ 'fichevisite_formulairclient' | translate }}
+              <label class="checkbox">
+                <input type="checkbox" name="formulaireClient" value="ok" ng-model="data.formulaireClient" />
+              </label>
+            </li>
+
+            <li class="item item-checkbox  checkbox-energized">
+              {{ 'fichevisite_flyers' | translate }}
+              <label class="checkbox">
+                <input type="checkbox" name="flyers" value="ok" ng-model="data.flyers" />
+              </label>
+            </li>
+
+
+            <select name="presenceConcurence" ng-model="data.presenceConcurence" class="item item-input item-select ion-input-select--large checkbox-assertive "
+              style="width:101%;padding:15px 5px">
+              <option value="" disabled selected hidden>{{ 'fichevisite_presenceconcurence' | translate }}</option>
+              <option value="Faible">{{ 'menu_select_faible' | translate }}</option>
+              <option value="Moyen">{{ 'menu_select_moyen' | translate }}</option>
+              <option value="Bon">{{ 'menu_select_forte' | translate }}</option>
+            </select>
+
+            <li class="item item-checkbox  checkbox-royal">
+              {{ 'fichevisite_branchsecteur' | translate }}
+              <label class="checkbox">
+                <input type="checkbox" name="bracheSecteur" value="ok" ng-model="data.bracheSecteur" />
+              </label>
+            </li>
+
+            <li class="item item-checkbox  checkbox-dark">
+              {{ 'fichevisite_dispositiojntpe' | translate }}
+              <label class="checkbox">
+                <input type="checkbox" name="dispositionTPE" value="ok" ng-model="data.dispositionTPE" />
+              </label>
+            </li>
+
+            <li class="item item-checkbox  checkbox-default">
+              {{ 'fichevisite_ccodeemployer' | translate }}
+              <label class="checkbox">
+                <input type="checkbox" name="connaissanceCodeEmployeTPE" value="ok" ng-model="data.connaissanceCodeEmployeTPE" />
+              </label>
+            </li>
+            <!--   <label class="item item-input " >  <input type="text" class=" checkbox-assertive" name="codePointVente" placeholder="Entrer le code du point de vente" ng-model="data.codePointVente">
+ </label>-->
+
+            <input type="text" name="example" id="example" ng-model="data.example" value="" style="display:none">
+
+            <label class="item item-input ">
+
+              <input type="number" class=" checkbox-assertive"  name="montantDeposit" placeholder="{{ 'fichevisite_montantdeposit' | translate }} ex: 5000000"
+                ng-model="data.montantDeposit" >
+
+            </label>
+
+
+            <select name="niveauBatterieTPE" ng-model="data.niveauBatterieTPE" class="item item-input item-select ion-input-select--large checkbox-assertive "
+              style="width:101%;padding:15px 5px">
+              <option value="" disabled selected hidden>{{ 'fichevisite_niveaubatterie' | translate }}</option>
+              <option value="Faible">{{ 'menu_select_faible' | translate }}</option>
+              <option value="Moyen">{{ 'menu_select_moyen' | translate }}</option>
+              <option value="Bon">{{ 'menu_select_bon' | translate }}</option>
+              <option value="Excellent">{{ 'menu_select_excellent' | translate }}</option>
+            </select>
+
+
+            <select name="niveauFormation" ng-model="data.niveauFormation" class="item item-input item-select ion-input-select--large checkbox-assertive "
+              style="width:101%;padding:15px 5px">
+              <option value="" disabled selected hidden>{{ 'fichevisite_niveauformation' | translate }}</option>
+              <option value="Faible">{{ 'menu_select_faible' | translate }}</option>
+              <option value="Moyen">{{ 'menu_select_moyen' | translate }}</option>
+              <option value="Bon">{{ 'menu_select_bon' | translate }}</option>
+              <option value="Excellent">{{ 'menu_select_excellent' | translate }}</option>
+            </select>
+
+            <label class="item item-input">
+
+              <textarea name="actionAMener" placeholder="{{ 'fichevisite_actionamener' | translate }}" ng-model="data.actionAMener" class="ion-input-select--large  checkbox-assertive">
+              </textarea>
+            </label>
+
+            <div class="row">
+              <div class="col text-center">
+                <a ng-show="isTrackingPosition == false" ng-click="isTrackingPosition = true; startTracking();" class="button button-positive">
+                  <i class="icon ion-ios-location"></i>
+                </a>
+                <a ng-show="isTrackingPosition ==true" ng-click="isTrackingPosition = false; stopTrackingPosition(); "
+                  onclick)="cacher();" class="button button-assertive"><i class="icon ion-ios-location"></i>
+                </a>
+              </div>
+            </div>
+            <script type="text/javascript">
+              function cacher() {
+                document.getElementById('cacher').style.visibility = 'hidden';
+              }
+
+            </script>
+            <div id="positionsList">
+              <div id="cacher">
+                <div ng-repeat="position in jsonPositionsLog   | limitTo: -1" id="positionsList1">
+
+                  <label class="item item-input">
+                    <input type="text" class="checkbox-assertive" placeholder="Longitude" ng-value="" name="longitude"
+                      ng-model="data.longitude" ng-init="data.longitude=position.longitude" readonly required>
+                  </label>
+
+                  <label class="item item-input">
+                    <input type="text" class=" checkbox-assertive" placeholder="Latitude" ng-value="" name="latitude"
+                      ng-model="data.latitude" ng-init="data.latitude=position.latitude" readonly required>
+                  </label>
+
+                </div>
+              </div>
+              <style>
+                /* Always set the map height explicitly to define the size of the div
+                  * element that contains the map. */
+                #mapf {
+                  height: 200px;
+                  margin: 5px;
+                }
+
+              </style>
+              <div id="mapf" data-tap-disabled="true"></div>
+            </div>
+            <div ng-hide="traitementLunch" ng-dblclick="data.dblclk = data.dblclk + 1" style="padding: 10px;">
+              <button ng-hide="traitementLunch"  ng-dblclick="data.dblclk = data.dblclk + 1" ng-init="data.dblclk=0" class="button button-block button-assertive" ng-click="submit()" color="danger" type="submit" name="submit"><span style="color:white">{{ 'btn_valide' | translate }}</span></button>
+            </div>
+      
+          </ul>
+     <!--   </form> -->
+      </ion-content>
+    </div>
+  </ion-pane>
+</ion-view>

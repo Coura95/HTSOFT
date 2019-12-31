@@ -1,0 +1,38 @@
+
+
+
+<ion-view view-title="Liste des voitures">
+  <ion-content >
+
+<style type="text/css">
+a:link{
+  text-decoration: none;
+}
+
+</style>
+    <ion-list>
+      <a ng-repeat="playlist in names" href="#/app/voiture/{{playlist.idvoitures}}">
+       <div class="item item-thumbnail-left" style="padding-left: 1px;">
+           <p style="width:110px;float:left;margin-right: 8px;line-height:60px;"> 
+<img src="../img/{{playlist.photo || 'DKRental.png'}}" style="width:110px ;height:auto">
+</p>       
+            <h2 style="border-bottom:1px solid #ddd;padding-bottom:5px">{{playlist.libelle_m}}</h2>
+
+            <p>Tarif : {{playlist.prixLocation}} fcfa/jour</p>
+            <p>Couleur : {{playlist.libelle}} </p>
+          
+          </div> 
+        
+      </a>
+    </ion-list>
+
+
+
+  </ion-content>
+
+
+
+
+
+
+</ion-view>

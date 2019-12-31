@@ -1,0 +1,12 @@
+<ion-view title="{{ 'sondage_header_page' | translate }}">
+          <div ng-app="starter" ng-controller="SignupCtrl">
+
+    <ion-content  class="has-header" >
+                  <h3 style="text-align:center">{{ 'label_sondage_actif' | translate }}</h3>
+
+      <ion-item ng-repeat="playlist in sondages" href="#/app/questions/{{playlist.idsondages}}" padding="true">
+        {{playlist.sondage}}
+      </ion-item>
+    </ion-content>
+</div>
+</ion-view>

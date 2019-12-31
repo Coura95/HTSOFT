@@ -1,0 +1,13 @@
+
+<ion-view view-title="{{ 'photo_header_page' | translate }}" ng-controller="ImageCtrl">
+  <ion-content padding="true">
+
+  <button class="button button-block button-energized" ng-click="addImage()">
+    {{ 'label_prendephoto' | translate }}
+  </button><br><br>
+  <ion-scroll>
+    <img ng-repeat="image in images" ng-src="{{image}}" height="200px"/>
+  </ion-scroll>
+
+</ion-content>
+</ion-view>

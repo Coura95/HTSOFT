@@ -1,0 +1,59 @@
+
+
+<ion-view view-title="La voiture">
+  <ion-content >
+
+<style type="text/css">
+a:link{
+  text-decoration: none;
+}
+
+</style>
+    <ion-list>
+      <div ng-repeat="playlist in voiture" >
+       <div  style="padding: 7px;">
+    
+
+
+       <div class="list card">
+
+  <div class="item item-avatar">
+    <img src="../img/{{playlist.photo || 'DKRental.png'}}">
+    <h2>{{playlist.libelle_m}}</h2>
+    <p>{{playlist.prixLocation}} fcfa/jour</p>
+  </div>
+
+  <div class="item item-body">
+<img  class="full-image" src="../img/{{playlist.photo || 'DKRental.png'}}" >
+<!--
+    <img class="full-image" src="../img/{{ playlist.photo }}">
+ -->  
+     <p>Tarif : {{playlist.prixLocation}} fcfa/jour</p>
+            <p>Couleur : {{playlist.libelle}} </p>
+    <p>
+      {{playlist.description}}
+    </p> 
+    <a class="button button-block button-positive ion-button full ion-button full" href="#/app/reserver">Réserver cette voiture</a>
+    <p>
+   
+
+    </p>
+  </div>
+
+</div>
+
+          </div> 
+        
+      </div>
+    </ion-list>
+
+
+
+  </ion-content>
+
+
+
+
+
+
+</ion-view>

@@ -1,0 +1,33 @@
+<ion-view title="{{ 'media_header_page' | translate }}">
+          <div ng-app="starter" >
+
+    <ion-content padding="true" class="has-header" >
+                  <h3 style="text-align:center">{{ 'label_mediatheque' | translate }}</h3>
+
+      <ion-item ng-repeat="playlist in medias">
+
+      <div ng-if="playlist.typeMedia == 'Image'">
+      	<a href="http://vps101245.ovh.net/yup/mediatheque/{{ playlist.media }}">
+<img src="http://vps101245.ovh.net/yup/mediatheque/{{ playlist.media }}" style="width:100%">
+      </a><br>
+<p>{{ playlist.description }}</p>
+
+  </div>
+
+  <div ng-if="playlist.typeMedia != 'Image'">
+      	<a href="http://vps101245.ovh.net/yup/mediatheque/{{ playlist.media }}">{{ playlist.media }}
+
+      </a><br>
+      <p>{{ playlist.description }}</p>
+
+
+  </div>
+
+
+ 
+      </ion-item>
+
+
+    </ion-content>
+</div>
+</ion-view>

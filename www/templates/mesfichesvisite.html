@@ -1,0 +1,52 @@
+<ion-view title="{{ 'header_label_page_mesfiches' | translate }}" cache-view="false">
+  <div ng-app="starter">
+
+    <ion-content padding="true" class="has-header">
+        <div class="item card ">
+          <input type="text" style="width:88%;float:left" ng-model="motcle" placeholder="Rechercher une fiche visite ...">
+        </div>
+
+      <ion-item ng-if="data.connect" ng-repeat="playlist in mesfichesvisite | filter:motcle">
+        {{ 'fichevisite_flyers' | translate }}: <span style="float:right">{{playlist.flyers}}</span><br>
+        {{ 'fichevisite_enseigneyup' | translate }}: <span style="float:right">{{playlist.photoPoint}}</span><br>
+        {{ 'fichevisite_brandingext' | translate }}: <span style="float:right">{{playlist.brandingExterieur}}</span><br>
+        {{ 'fichevisite_brandingint' | translate }}: <span style="float:right">{{playlist.brandingInterieur}}</span><br>
+        {{ 'fichevisite_grilletarif' | translate }}: <span style="float:right">{{playlist.grilleTarifVisible}}</span><br>
+        {{ 'fichevisite_formulairclient' | translate }}: <span style="float:right">{{playlist.formulaireClient}}</span><br>
+        {{ 'fichevisite_montantdeposit' | translate }}: <span style="float:right">{{playlist.montantDeposit}}</span><br>
+        {{ 'fichevisite_niveaubatterie' | translate }}: <span style="float:right">{{playlist.niveauBatterieTPE}}</span><br>
+        {{ 'fichevisite_branchsecteur' | translate }}: <span style="float:right">{{playlist.bracheSecteur}}</span><br>
+        {{ 'fichevisite_dispositiojntpe' | translate }}: <span style="float:right">{{playlist.dispositionTPE}}</span><br>
+        {{ 'fichevisite_ccodeemployer' | translate }}: <span style="float:right">{{playlist.connaissanceCodeEmployeTPE}}</span><br>
+        {{ 'fichevisite_niveauformation' | translate }}: <span style="float:right">{{playlist.niveauFormation}}</span><br>
+        {{ 'fichevisite_presenceconcurence' | translate }}: <span style="float:right">{{playlist.presenceConcurence}}</span><br>
+        {{ 'label_date' | translate }}: <span style="float:right">{{playlist.dateAjout}}</span><br>
+        {{ 'fichevisite_actionamener' | translate }}: <span style="float:right">{{playlist.actionAMener}}</span> <br>
+        {{ 'fichevisite_choixpoint' | translate }}: <span style="float:right">{{playlist.idPointvent}}</span><br>
+        {{ 'clien_label' | translate }}: <span style="float:right">{{playlist.clientPointvente}}</span><br>
+
+      </ion-item>
+      <!-- fichs locales -->
+      <ion-item ng-if="!data.connect" ng-repeat="playlist in mesfichesvisitelocal | filter:motcle">
+        Flyers: <span style="float:right">{{playlist.fichev.flyers}}</span><br>
+        Enseigne: <span style="float:right">{{playlist.fichev.photoPoint}}</span><br>
+        Branding Exterieur: <span style="float:right">{{playlist.fichev.brandingExterieur}}</span><br>
+        Branding Interieur: <span style="float:right">{{playlist.fichev.brandingInterieur}}</span><br>
+        Grille Tarif Visible: <span style="float:right">{{playlist.fichev.grilleTarifVisible}}</span><br>
+        Formulaire Client: <span style="float:right">{{playlist.fichev.formulaireClient}}</span><br>
+        Montant Deposit: <span style="float:right">{{playlist.fichev.montantDeposit}}</span><br>
+        Niveau Batterie TPE: <span style="float:right">{{playlist.fichev.niveauBatterieTPE}}</span><br>
+        Branche Secteur: <span style="float:right">{{playlist.fichev.bracheSecteur}}</span><br>
+        Disposition TPE: <span style="float:right">{{playlist.fichev.dispositionTPE}}</span><br>
+        Connaissance Code Employe TPE: <span style="float:right">{{playlist.fichev.connaissanceCodeEmployeTPE}}</span><br>
+        Niveau Formation: <span style="float:right">{{playlist.fichev.niveauFormation}}</span><br>
+        Présence Concurent: <span style="float:right">{{playlist.fichev.presenceConcurence}}</span><br>
+        Date Ajout: <span style="float:right">{{playlist.fichev.dateAjout |  date:'yyyy-MM-dd'}}</span><br>
+        Actions à Mener: <span style="float:right">{{playlist.fichev.actionAMener}}</span> <br>
+        Point de Vente: <span style="float:right">{{playlist.fichev.clientPointvente}}</span><br>
+        Client: <span style="float:right">{{playlist.fichev.client}}</span><br>
+
+      </ion-item>
+    </ion-content>
+  </div>
+</ion-view>

@@ -1,0 +1,37 @@
+<ion-view view-title="{{ 'question_header_page' | translate }}">
+  <ion-content ng-controller="ReponsesCtrl">
+    <br>
+    <div ng-repeat="playlist in questions" href="#">
+      <ion-list>
+        <div  style="padding-left: 1px;">
+          <ion-item>
+            <h3>{{playlist.question}}</h3>
+          </ion-item>
+        </div>
+      </ion-list>
+
+      <form method="post"  ng-submit="submit()" >
+        <ul class = "list">
+          <li class = "item item-checkbox  checkbox-positive">
+           {{ 'alert_button_oui' | translate }}
+            <label class = "checkbox">
+                <input type="radio" name="reponse" ng-model="data.reponse" ng-init="data.reponse='oui'" value="oui">
+            </label>
+          </li>
+          <li class = "item item-checkbox  checkbox-positive">
+            {{ 'alert_button_non' | translate }}
+            <label class = "checkbox">
+              <input type="radio" name="reponse" ng-model="data.reponse" ng-init="data.reponse='non'" value="non">
+            </label>
+          </li>
+
+          <input style="display:none" type="text" name="idquestionSondage"  ng-model="data.idquestionSondage"  ng-init="data.idquestionSondage=playlist.idquestionSondage" readonly>
+
+        </ul>
+        <div style="padding: 0 10px;">
+          <button class="button button-block button-assertive" type="submit" color="danger"  (click)="submit()" ><span style="color:white">{{ 'btn_valide' | translate }}</span></button>
+        </div>
+      </form>
+    </div>
+  </ion-content>
+</ion-view>

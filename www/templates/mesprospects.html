@@ -1,0 +1,35 @@
+<ion-view title="{{ 'listprospect_header_page' | translate }}" cache-view="false">
+  <div ng-app="starter">
+
+    <ion-content padding="true" class="has-header">
+      <div class="item card ">
+        <input type="text" style="width:88%;float:left" ng-model="motcle" placeholder="{{ 'label_search_prospect' | translate }}...">
+      </div>
+
+      <ion-item ng-if="data.connect" ng-repeat="playlist in mesprospects | filter:motcle">
+        {{ 'label_frequentation_lieu' | translate }}: <span style="float:right">{{playlist.Frequentationdeslieux}}</span><br>
+        {{ 'label_tailledupoint' | translate }}: <span style="float:right">{{playlist.TailleduPoint}}</span><br>
+        {{ 'label_nomprospect' | translate }}: <span style="float:right">{{playlist.Prospect}}</span><br>
+        {{ 'popup_telephone' | translate }}: <span style="float:right">{{playlist.telephone}}</span><br>
+        {{ 'label_interetmanifesteyup' | translate }}: <span style="float:right">{{playlist.InteretmanifestepourYUP}}</span><br>
+        {{ 'fichevisite_presenceconcurence' | translate }}: <span style="float:right">{{playlist.Concurrence}}</span><br>
+        {{ 'label_adresse' | translate }}: <span style="float:right">{{playlist.adresse}}</span><br>
+        {{ 'label_pays' | translate }}: <span style="float:right">{{playlist.Pays}}</span><br>
+        {{ 'label_region_choisi' | translate }}: <span style="float:right">{{playlist.Region}}</span><br>
+        {{ 'label_ville_choisie' | translate }}: <span style="float:right">{{playlist.ville}}</span><br>
+        {{ 'label_date' | translate }}: <span style="float:right">{{playlist.Date | date:'yyyy-MM-dd'}}</span><br>
+
+      </ion-item>
+
+      <ion-item ng-if="!data.connect" ng-repeat="playlist in mesprospectsocal | filter:motcle">
+        {{ 'label_frequentation_lieu' | translate }}:: <span style="float:right">{{playlist.Frequentationdeslieux}}</span><br>
+        {{ 'label_tailledupoint' | translate }}: <span style="float:right">{{playlist.tailledupoint}}</span><br>
+        {{ 'label_interetmanifesteyup' | translate }}: <span style="float:right">{{playlist.InteretmanifestepourYUP}}</span><br>
+        {{ 'fichevisite_presenceconcurence' | translate }}: <span style="float:right">{{playlist.presencedelaconcurrence}}</span><br>
+        {{ 'label_adresse' | translate }}: <span style="float:right">{{playlist.adresse}}</span><br>
+        {{ 'label_ville_choisie' | translate }}: <span style="float:right">{{playlist.ville}}</span><br>
+        {{ 'label_date' | translate }}: <span style="float:right">{{playlist.dateajout | date:'yyyy-MM-dd'}}</span><br>
+      </ion-item>
+    </ion-content>
+  </div>
+  </ion-view>

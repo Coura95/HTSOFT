@@ -1,0 +1,35 @@
+
+<ion-view view-title="{{ 'change_pwd_header_page' | translate }}">
+        <ion-pane>
+          <div ng-app="starter" ng-controller="SignupCtrl">
+ 
+            <ion-content padding="true" overflow-scroll="false">
+                <h3 style="text-align:center">{{ 'label_title' | translate }}</h3>
+
+                <form ng-submit="submit()">
+         <div class="spacer" style="height: 10px;"></div>
+
+        
+                    <label class="item item-input item-stacked-label" style="background:#fff;display:none">
+                        <input type="text" name="username" placeholder="{{ 'placeholder_username' | translate }}" ng-model="data.username"
+
+                      value="myusername" >
+
+                    </label>
+                    <label class="item item-input item-stacked-label" >
+                      <input type="password" name="newpassword1" placeholder="{{ 'placeholder_pwd' | translate }}" ng-model="data.newpassword1" required>
+
+</label>
+                    <label class="item item-input item-stacked-label">
+                      <input type="password" name="newpassword2" placeholder="{{ 'placeholder_pwd1' | translate }}" ng-model="data.newpassword2" required>
+
+                     </label>
+       <button class="button button-block button-positive" color="danger" type="submit" name="submit" ><span style="color:white">{{ 'btn_change' | translate }}</span></button>
+
+                </form>
+                
+            </ion-content>
+        </ion-pane>
+
+      </div> 
+</ion-view>

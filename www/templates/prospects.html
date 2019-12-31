@@ -1,0 +1,236 @@
+<ion-view view-title="{{ 'prospect_header_page' | translate }}" cache-view="false">
+  <ion-pane>
+    <div ng-app="starter" >
+
+      <ion-content>
+
+        <style type="text/css">
+          input[readonly] {
+            background-color: transparent !important;
+            cursor: not-allowed;
+          }
+
+        </style>
+   <!--  <form ng-submit="submit()" method="post" enctype="multipart/form-data">  -->
+
+          <ul class="list">
+
+            <!--Test         Pays                       -->
+            <div class="item item-body"  ng-if="data.profile=='super'">
+              <button class="button button-block button-dark"
+              cancel-button="{{ 'fichevisite_select_pv_return' | translate }}"
+              reset-button="{{ 'fichevisite_select_pv_cancel' | translate }}"
+              cancel-search-button="{{ 'fichevisite_select_pv_clear' | translate }}"
+              search-placeholder="{{ 'fichevisite_select_pv_search' | translate }}"
+              modal-select="" 
+              ng-model="data.payschoisit" 
+              options="listdespays"
+              modal-button-left="{{ 'fichevisite_select_pv_return' | translate }}"
+               option-getter="getOptPays(option)"
+                modal-title="Selection" 
+                has-search="true">
+                {{ 'label_choix_pays' | translate }}
+                <div class="option">
+                  <h2>{{option.name}}</h2>
+
+                </div>
+
+              </button>
+            </div>
+            <div class="item" style="color: #222222;font-weight: bolder">
+              {{ 'label_pays' | translate }} : <b style="color: blue" ng-if="data.payschoisit!=null">{{data.payschoisit.name}}</b>
+            </div>
+            <!--Test                                -->
+            <!--Test                                -->
+            <!--Test                                -->
+
+            <!--Test         Regions                       -->
+            <div class="item item-body"
+             ng-click="listDesregionsByPaysID()" ng-if="data.payschoisit!=null">
+              <button ng-if="data.payschoisit!=null"
+               class="button button-block button-dark" 
+               cancel-button="{{ 'fichevisite_select_pv_return' | translate }}"
+               reset-button="{{ 'fichevisite_select_pv_cancel' | translate }}"
+               cancel-search-button="{{ 'fichevisite_select_pv_clear' | translate }}"
+               search-placeholder="{{ 'fichevisite_select_pv_search' | translate }}" 
+               modal-select="" 
+               ng-model="data.regionchoisit" 
+               options="listregions" 
+               option-getter="getOptRegion(option)" 
+               modal-button-left="{{ 'fichevisite_select_pv_return' | translate }}"
+               modal-title="Selection" 
+               has-search="true">
+                {{ 'label_choix_region' | translate }}
+                <div  class="option">
+                  <h2 > {{option.name}}</h2>
+                </div>
+              </button>
+            </div>
+            <div ng-if="data.payschoisit!=null" class="item" style="color: #222222;font-weight: bolder">
+              <u ng-if="data.payschoisit!=null">{{ 'label_region_choisi' | translate }} :</u> <b style="color: blue" ng-if="data.regionchoisit!=null">{{data.regionchoisit.name}}</b>
+            </div>
+            <!--Test                                -->
+            <!--Test                                -->
+            <!--Test                                -->
+
+
+            <!--Test       Ville                         -->
+            <div class="item item-body" ng-click="listVillesByRegionID()" ng-if="data.regionchoisit!=null">
+              <button ng-if="data.regionchoisit!=null"
+               class="button button-block button-dark" 
+               cancel-button="{{ 'fichevisite_select_pv_return' | translate }}"
+               reset-button="{{ 'fichevisite_select_pv_cancel' | translate }}"
+               cancel-search-button="{{ 'fichevisite_select_pv_clear' | translate }}"
+               search-placeholder="{{ 'fichevisite_select_pv_search' | translate }}" 
+               modal-select="" 
+               ng-model="data.villechoisit" 
+               options="listvilles" 
+               option-getter="getOptVille(option)"
+               modal-button-left="{{ 'fichevisite_select_pv_return' | translate }}" 
+               modal-title="Selection" 
+               has-search="true">
+                {{ 'label_choix_ville' | translate }}
+                <div  class="option">
+                  <h2 >{{option.name}}</h2>
+
+                </div>
+
+              </button>
+            </div>
+            <div ng-if="data.regionchoisit!=null" class="item" style="color: #222222;font-weight: bolder">
+              <u ng-if="data.regionchoisit!=null">{{ 'label_ville_choisie' | translate }} :</u> <b style="color: blue" ng-if="data.villechoisit!=null">{{data.villechoisit.name}}</b>
+            </div>
+            <!--Test                                -->
+            <!--Test                                -->
+            <!--Test                                -->
+
+            <label class="item item-input ">
+
+              <input type="text" class=" checkbox-assertive" name="prospect" placeholder="{{ 'label_adresse' | translate }}" ng-model="data.adresse">
+
+            </label>
+
+            <select name="frequentationdeslieux" ng-model="data.frequentationdeslieux" class="item item-input item-select ion-input-select--large checkbox-assertive "
+              style="width:101%;padding:15px 5px">
+              <option value="" disabled selected hidden>{{ 'label_frequentation_lieu' | translate }}</option>
+              <option value="Faible">{{ 'menu_select_faible' | translate }}</option>
+              <option value="Moyen">{{ 'menu_select_moyen' | translate }}</option>
+              <option value="Faible">{{ 'menu_select_faible' | translate }}</option>
+              <option value="Moyen">{{ 'menu_select_forte' | translate }}</option>
+            </select>
+            <select name="tailledupoint" ng-model="data.tailledupoint" class="item item-input item-select ion-input-select--large checkbox-assertive "
+              style="width:101%;padding:15px 5px">
+              <option value="" disabled selected hidden>{{ 'label_tailledupoint' | translate }}</option>
+              <option value="Faible">{{ 'menu_select_grande' | translate }}</option>
+              <option value="Moyen">{{ 'menu_select_moyen' | translate }}</option>
+              <option value="Faible">{{ 'menu_select_petite' | translate }}</option>
+             
+            </select>
+            <select name="presencedelaconcurrence" ng-model="data.presencedelaconcurrence" class="item item-input item-select ion-input-select--large checkbox-assertive "
+              style="width:101%;padding:15px 5px">
+              <option value="" disabled selected hidden>{{ 'fichevisite_presenceconcurence' | translate }}</option>
+              <option value="Faible">{{ 'menu_select_faible' | translate }}</option>
+              <option value="Moyen">{{ 'menu_select_moyen' | translate }}</option>
+              <option value="Bon">{{ 'menu_select_forte' | translate }}</option>
+            </select>
+            <select name="InteretmanifestepourYUP" ng-model="data.InteretmanifestepourYUP" class="item item-input item-select ion-input-select--large checkbox-assertive "
+              style="width:101%;padding:15px 5px">
+              <option value="" disabled selected hidden>{{ 'label_interetmanifesteyup' | translate }}</option>
+              <option value="Faible">{{ 'menu_select_forte' | translate }}</option>
+              <option value="Moyen">{{ 'menu_select_moyen' | translate }}</option>
+              <option value="Bon">{{ 'menu_select_null' | translate }}</option>
+            </select>
+
+            <label class="item item-input ">
+
+              <input type="text" class=" checkbox-assertive" name="prospect" placeholder="{{ 'label_nomprospect' | translate }}"
+                ng-model="data.prospect">
+
+            </label>
+
+            <label class="item item-input ">
+
+              <input type="text" class=" checkbox-assertive" name="data.prospect" placeholder="{{ 'popup_telephone' | translate }}"
+                ng-model="data.telephone">
+
+            </label>
+
+            <button ng-if="showphoto" class="button button-block button-energized" ng-click="addImage()">
+              {{ 'label_prendephoto' | translate }}
+            </button><br><br>
+            <ion-scroll>
+              <img  ng-src="{{images}}" imageViewer height="200px"/>
+            </ion-scroll>
+
+         
+
+            <label class="item item-input">
+
+              <textarea name="commentaire" placeholder="{{ 'label_commentaire' | translate }}" ng-model="data.commentaire" class="ion-input-select--large"
+                style="min-height:150px">
+
+</textarea>
+            </label>
+
+            <div class="row">
+              <div class="col text-center">
+                <a ng-show="isTrackingPosition == false" ng-click="isTrackingPosition = true; startTracking();" class="button button-positive">
+                  <i class="icon ion-ios-location"></i>
+                </a>
+                <a ng-show="isTrackingPosition ==true" ng-click="isTrackingPosition = false; stopTrackingPosition(); "
+                  onclick)="cacher();" class="button button-assertive"><i class="icon ion-ios-location"></i>
+                </a>
+              </div>
+            </div>
+            <script type="text/javascript">
+              function cacher() {
+                document.getElementById('cacher').style.visibility = 'hidden';
+              }
+
+            </script>
+            <div id="positionsList">
+              <div id="cacher">
+                <div ng-repeat="position in jsonPositionsLog   | limitTo: -1" id="positionsList1">
+
+                  <label class="item item-input">
+                    <input type="text" class="checkbox-assertive"  ng-value="" name="longitude"
+                      ng-model="data.longitude" ng-init="data.longitude=position.longitude" readonly required>
+                  </label>
+
+                  <label class="item item-input">
+                    <input type="text" class=" checkbox-assertive" placeholder="Latitude" ng-value="" name="latitude"
+                      ng-model="data.latitude" ng-init="data.latitude=position.latitude" readonly required>
+                  </label>
+
+
+
+                </div>
+              </div>
+              <style>
+                /* Always set the map height explicitly to define the size of the div
+   * element that contains the map. */
+  #mapp {
+    height: 200px;
+  }
+
+</style>
+              <div id="mapp" data-tap-disabled="true"></div>
+
+            </div>
+
+
+            <div style="padding: 10px;">
+              <button ng-click="submit()" class="button button-block button-assertive" color="danger" type="submit" name="submit"><span style="color:white">{{ 'btn_valide' | translate }}</span></button>
+            </div>
+
+          </ul>
+
+
+
+      <!--  </form>  -->
+
+
+      </ion-content>
+    </div>
+  </ion-pane>
+</ion-view>

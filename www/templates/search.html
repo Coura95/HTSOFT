@@ -1,0 +1,17 @@
+
+<ion-view view-title="Rechercher une fiche de visite">
+  <ion-content>
+<div class="item card ">   
+<input type="text" style="width:88%;float:left" ng-model="motcle" placeholder="Rechercher une fiche de visite...">
+
+</div>
+
+      <div class="list" id="contents" ng-app="starter">
+       <ion-item ng-repeat="playlist in fichevisite | filter: motcle" >
+        {{playlist.longitude}}<br>
+        {{playlist.latitude}}
+      </ion-item>
+    </div>
+    <br><br>
+  </ion-content>
+</ion-view>

@@ -1,0 +1,26 @@
+<ion-view title="Les points de vente">
+
+<style>
+       #map {
+        height: 400px;
+        width: 100%;
+       }
+</style>
+
+
+<div ng-app="starter" >
+
+    <ion-content padding="true" class="has-header" >
+
+      <ion-item ng-repeat="playlist in fichevisite" >
+        {{playlist.longitude}}<br>
+        {{playlist.latitude}}
+      </ion-item>
+
+ 
+    </ion-content>
+</div>
+
+
+</script>
+</ion-view>

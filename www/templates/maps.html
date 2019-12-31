@@ -1,0 +1,90 @@
+<ion-view  title="{{ 'header_label_page' | translate }}" style="color: red" cache-view="false">
+  <div ng-app="starter">
+
+    <style type="text/css">
+      scroll {
+        height: 100%;
+      }
+
+      #map2 {
+        width: 100%;
+        height: 100%;
+      }
+
+    </style>
+
+    <ion-content>
+        <!--Test 
+                                       -->
+         <div ng-if="data.cache">
+          <div class="item item-body"  ng-if="data.profile=='super'">
+            <button class="button button-block button-dark"
+            cancel-button="{{ 'fichevisite_select_pv_return' | translate }}"
+            reset-button="{{ 'fichevisite_select_pv_cancel' | translate }}"
+            cancel-search-button="{{ 'fichevisite_select_pv_clear' | translate }}"
+            search-placeholder="{{ 'fichevisite_select_pv_search' | translate }}"
+            modal-select="" 
+            ng-model="data.payschoisit" 
+            on-select="refreshregion()"
+            options="data.listpays"
+            modal-button-left="{{ 'fichevisite_select_pv_return' | translate }}"
+             option-getter="getOptPays(option)"
+              modal-title="Selection" 
+              has-search="true">
+              {{ 'label_choix_pays' | translate }}
+              <div class="option">
+                <h2>{{option.name}}</h2>
+  
+              </div>
+  
+            </button>
+          </div>
+          <div class="item" style="color: #222222;font-weight: bolder">
+            {{ 'label_pays' | translate }} : <b style="color: blue" ng-if="data.payschoisit!=null">{{data.payschoisit.name}}</b>
+          </div>
+  
+          <div class="item item-body"
+               ng-click="listDesregionsByPaysID()" ng-if="data.payschoisit!=null">
+                <button ng-if="data.payschoisit!=null"
+                 class="button button-block button-dark" 
+                 cancel-button="{{ 'fichevisite_select_pv_return' | translate }}"
+                 reset-button="{{ 'fichevisite_select_pv_cancel' | translate }}"
+                 cancel-search-button="{{ 'fichevisite_select_pv_clear' | translate }}"
+                 search-placeholder="{{ 'fichevisite_select_pv_search' | translate }}" 
+                 modal-select="" 
+                 ng-model="data.regionchoisit" 
+                 on-select="listPvPhp()"
+                 options="listregions" 
+                 option-getter="getOptRegion(option)" 
+                 modal-button-left="{{ 'fichevisite_select_pv_return' | translate }}"
+                 modal-title="Selection" 
+                 has-search="true">
+                  {{ 'label_choix_region' | translate }}
+                  <div  class="option">
+                    <h2 > {{option.name}}</h2>
+                  </div>
+                </button>
+              </div>
+              <div ng-if="data.payschoisit!=null" class="item" style="color: #222222;font-weight: bolder">
+                <u ng-if="data.payschoisit!=null">{{ 'label_region_choisi' | translate }} :</u> <b style="color: blue" ng-if="data.regionchoisit!=null">{{data.regionchoisit.name}}</b>
+              </div>
+  
+         </div>
+         <style>
+          /* Always set the map height explicitly to define the size of the div
+            * element that contains the map. */
+          #map2 {
+            height: 400px;
+            margin: 5px;
+            padding: 2%;
+          }
+
+        </style>
+      <div id="map2" data-tap-disabled="true"></div>
+
+
+    </ion-content>
+
+  </div>
+
+</ion-view>

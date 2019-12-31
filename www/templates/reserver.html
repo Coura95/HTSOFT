@@ -1,0 +1,75 @@
+<!--
+<ion-view view-title="Inscription">
+  <ion-content style="padding:15px">
+ <h4>S'inscrire</h4>
+
+<div class="lists">   
+
+
+    <form ng-submit="doSignup()">
+
+  <label class="item item-input">
+          <span class="input-label">Nom complet</span>
+          <input type="text" ng-model="loginData.name">
+        </label>
+
+        <label class="item item-input">
+          <span class="input-label">Adresse Email</span>
+          <input type="text" ng-model="loginData.email">
+        </label>
+        <label class="item item-input">
+          <span class="input-label">Username</span>
+          <input type="text" ng-model="loginData.username">
+        </label>
+        <label class="item item-input">
+          <span class="input-label">Mot de passe</span>
+          <input type="password" ng-model="loginData.password">
+        </label>
+        <label class="item">
+          <button class="button button-block button-positive" type="submit">Se connecter</button>
+        </label>
+      </div>
+    </form>
+
+</div> </ion-content>
+-->
+<ion-view view-title="Réservation">
+        <ion-pane>
+          <div ng-app="starter" ng-controller="SignupCtrl">
+ 
+            <ion-content padding="true">
+                <form ng-submit="submit()">
+
+                   <label class="item item-input item-stacked-label">
+          <span class="input-label">Nom complet</span>
+          <input type="text" name="name" placeholder="Entrer nom complet" ng-model="data.name">
+        </label>
+
+        <label class="item item-input item-stacked-label">
+          <span class="input-label">Adresse Email</span>
+          <input type="text" name="email" placeholder="Entrer adresse email" ng-model="data.email">
+        </label>
+
+
+                    <label class="item item-input item-stacked-label">
+                        <span class="input-label">Téléphone</span>
+                        <input type="text" name="telephone" placeholder="Entrer un téléphone valide" ng-model="data.telephone">
+                    </label>
+
+                     <label class="item item-input item-stacked-label">
+                        <span class="input-label">Date de location</span>
+                        <input type="date" name="date" placeholder="Entrer mot de passe" ng-model="data.date">
+                    </label>
+ 
+  <label class="item item-input item-stacked-label">
+                        <span class="input-label">Nombre de jours</span>
+                        <input type="text" name="nombrej" placeholder="Entrer nombre de jour" ng-model="data.nombrej">
+                    </label>
+
+                    <input class="button button-block button-positive ion-button full" type="submit" name="submit" value="Réserver maintenant">                    
+                </form>
+ 
+            </ion-content>
+        </ion-pane>
+      </div> 
+</ion-view>
