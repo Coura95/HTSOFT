@@ -261,7 +261,16 @@ angular.module('starter', ['ionic', 'ionic-modal-select', 'starter.controllers',
         }
       }
     })
+    .state('app.addcompte', {
+      url: '/addcompte',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/addcompte.html',
+          controller: 'AddcompteCtrl'
 
+        }
+      }
+    })
     .state('app.fichevisite', {
       url: '/fichevisite',
       views: {

@@ -15,11 +15,11 @@
         </button>
       </ion-nav-buttons>
 
-      <ion-nav-buttons side="right">
+      <!--<ion-nav-buttons side="right">
         <a id="buttonright" href="#/app/compte" class="button button-icon button-clear ion-ios-cog" ng-style="buttonleft">
         </a>
         <ion-icon name="pin"></ion-icon>
-      </ion-nav-buttons>
+      </ion-nav-buttons>-->
 
     </ion-nav-bar>
     <ion-nav-view name="menuContent"></ion-nav-view>
@@ -27,7 +27,7 @@
 
   <ion-side-menu  side="left">
     <ion-header-bar class="bar-assertive">
-      <h1 class="title">YUP SPOT</h1>
+      <h1 class="title">CCBM-R</h1>
       <a id="buttonright" ng-click="majStat()" class="button button-icon button-clear ion-settings" ng-style="buttonleft">
       </a>
     </ion-header-bar>
@@ -36,37 +36,35 @@
       
       <ion-list ng-show="menu">
 
-        
-
         <ion-item   menu-close href="#/app/bienvenue">
           <i class="icon ion-home"></i> &nbsp;{{ 'menu_acceuil' | translate }}
         </ion-item>
 
-        <ion-item  menu-close href="#/app/fichevisite">
+      <!--  <ion-item  menu-close href="#/app/fichevisite">
           <i class="icon ion-plus-circled"></i> &nbsp;{{ 'menu_addfiche' | translate }}
-        </ion-item>
+        </ion-item>-->
 
         <ion-item  menu-close href="#/app/prospects">
-          <i class="icon ion-plus"></i> &nbsp;{{ 'menu_addprospect' | translate }}
+          <i class="icon ion-plus"></i> &nbsp;Point de vente
         </ion-item>
 
-        <ion-item  menu-close href="#/app/sondages">
+     <!--   <ion-item  menu-close href="#/app/sondages">
           <i class="icon ion-speakerphone"></i> &nbsp;{{ 'menu_sondage' | translate }}
         </ion-item>
 
         <ion-item  menu-close href="#/app/mesfiches">
           <i class="icon ion-ios-list"></i> &nbsp;{{ 'menu_mesfiches' | translate }}
-        </ion-item>
+        </ion-item>-->
 
         <ion-item  menu-close href="#/app/mesprospects">
-          <i class="icon ion-ios-list"></i> &nbsp;{{ 'menu_mesprospects' | translate }}
+          <i class="icon ion-ios-list"></i> &nbsp;Liste points de vente
         </ion-item>
 
         <ion-item  menu-close href="#/app/maps">
-          <i class="icon ion-ios-location"></i> &nbsp;{{ 'menu_mespoints' | translate }}
+          <i class="icon ion-ios-location"></i> &nbsp;Carte Map
         </ion-item>
 
-        <ion-item  menu-close href="#/app/medias">
+      <!--  <ion-item  menu-close href="#/app/medias">
           <i class="icon ion-ios-film-outline"></i> &nbsp;{{ 'menu_mediatheque' | translate }}
         </ion-item>
 
@@ -80,7 +78,7 @@
 
         <ion-item  menu-close href="#/app/compte">
           <i class="icon ion-person"></i> &nbsp;{{ 'menu_moncompte' | translate }}
-        </ion-item>
+        </ion-item>-->
 
         <ion-item menu-close href="#/app/logout">
           <i class="icon ion-log-out"></i> &nbsp;{{ 'menu_sedeconnecter' | translate }}
@@ -96,7 +94,7 @@
     
     <ion-tabs class="tabs-icon-bottom">
 
-        <ion-tab ng-click="majStat()" title="{{ 'TAB1' | translate }}"  icon="icon ion-home" href="#/app/acceuil">
+        <ion-tab ng-click="majStat()" title="CCBM-R"  icon="icon ion-home" href="#/app/acceuil">
           <ion-nav-view name="tab-dash"></ion-nav-view>
         </ion-tab>
       

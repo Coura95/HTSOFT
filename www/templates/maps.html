@@ -18,7 +18,7 @@
                                        -->
          <div ng-if="data.cache">
           <div class="item item-body"  ng-if="data.profile=='super'">
-            <button class="button button-block button-dark"
+            <button class="button button-block button-assertive"
             cancel-button="{{ 'fichevisite_select_pv_return' | translate }}"
             reset-button="{{ 'fichevisite_select_pv_cancel' | translate }}"
             cancel-search-button="{{ 'fichevisite_select_pv_clear' | translate }}"
@@ -44,16 +44,16 @@
           </div>
   
           <div class="item item-body"
-               ng-click="listDesregionsByPaysID()" ng-if="data.payschoisit!=null">
+                ng-if="data.payschoisit!=null">
                 <button ng-if="data.payschoisit!=null"
-                 class="button button-block button-dark" 
+                 class="button button-block button-assertive" 
                  cancel-button="{{ 'fichevisite_select_pv_return' | translate }}"
                  reset-button="{{ 'fichevisite_select_pv_cancel' | translate }}"
                  cancel-search-button="{{ 'fichevisite_select_pv_clear' | translate }}"
                  search-placeholder="{{ 'fichevisite_select_pv_search' | translate }}" 
                  modal-select="" 
                  ng-model="data.regionchoisit" 
-                 on-select="listPvPhp()"
+                 on-select="listVillesByRegionID()"
                  options="listregions" 
                  option-getter="getOptRegion(option)" 
                  modal-button-left="{{ 'fichevisite_select_pv_return' | translate }}"
@@ -67,6 +67,29 @@
               </div>
               <div ng-if="data.payschoisit!=null" class="item" style="color: #222222;font-weight: bolder">
                 <u ng-if="data.payschoisit!=null">{{ 'label_region_choisi' | translate }} :</u> <b style="color: blue" ng-if="data.regionchoisit!=null">{{data.regionchoisit.name}}</b>
+              </div>
+
+              <div class="item item-body"  ng-if="data.regionchoisit!=null">
+                <button ng-if="data.regionchoisit!=null" class="button button-block button-assertive"
+                  cancel-button="{{ 'fichevisite_select_pv_return' | translate }}"
+                  reset-button="{{ 'fichevisite_select_pv_cancel' | translate }}"
+                  cancel-search-button="{{ 'fichevisite_select_pv_clear' | translate }}"
+                  search-placeholder="{{ 'fichevisite_select_pv_search' | translate }}" modal-select=""
+                  ng-model="data.villechoisit" options="listvilles" option-getter="getOptVille(option)"
+                  on-select="listPvPhp()"
+                  modal-button-left="{{ 'fichevisite_select_pv_return' | translate }}" modal-title="Selection"
+                  has-search="true">
+                  {{ 'label_choix_ville' | translate }}
+                  <div class="option">
+                    <h2>{{option.name}}</h2>
+    
+                  </div>
+    
+                </button>
+              </div>
+              <div ng-if="data.regionchoisit!=null" class="item" style="color: #222222;font-weight: bolder">
+                <u ng-if="data.regionchoisit!=null">{{ 'label_ville_choisie' | translate }} :</u> <b style="color: blue"
+                  ng-if="data.villechoisit!=null">{{data.villechoisit.name}}</b>
               </div>
   
          </div>

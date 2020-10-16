@@ -1,0 +1,76 @@
+<ion-view title="Creationdecompte" hide-nav-bar="true" cache-view="false">
+    <div ng-app="starter" ng-controller="AddcompteCtrl">
+        <ion-content padding="'true'" class="has-header" overflow-scroll="false">
+            <h2 style="text-align:center">Creation de compte</h2>
+            <form class="list">
+                <div class="spacer" style="height: 20px;"></div>
+
+                <ion-list>
+                    <label class="item item-input">
+                        <span class="input-label">Nom</span>
+                        <input ng-model="user.nom" type="text" placeholder="Entrer votre nom" focus>
+                    </label>
+                </ion-list>
+
+                <ion-list>
+                    <label class="item item-input">
+                        <span class="input-label">Prénom </span>
+                        <input ng-model="user.prenom" type="text" placeholder="Entrer votre prenom" focus>
+                    </label>
+                </ion-list>
+
+                <label class="item item-input">
+                    <span class="input-label">Télephone</span>
+                    <input ng-model="user.telephone" type="text" placeholder="Entre votre telephone" focus>
+                </label>
+                </ion-list>
+
+                <ion-list>
+                    <label class="item item-input">
+                        <span class="input-label">Adresse </span>
+                        <input ng-model="user.adresse" type="text" placeholder="Entrer votre adresse" focus>
+                    </label>
+                </ion-list>
+
+                <ion-list>
+                    <label class="item item-input">
+                        <span class="input-label">email </span>
+                        <input ng-model="user.email" type="text" placeholder="Entrer votre email" focus>
+                    </label>
+                </ion-list>
+
+                <ion-list>
+                    <label class="item item-input">
+                        <!-- <span class="input-label">Mot de passe </span>-->
+                        <input type="password" name="uPassword" minlength="3" placeholder="Mot de passe"
+                            ng-model="user.password" ui-show-password required>
+                    </label>
+                </ion-list>
+                <ion-list>
+                    <label class="item item-input">
+                        <input type="password" name="uPassword" minlength="3" placeholder="Confirmer le mot de passe"
+                            ng-model="user.passwordconfirm" ui-show-password required>
+                    </label>
+                </ion-list>
+
+
+
+                <div class="spacer" style="height: 20px;"></div>
+                <button class="button button-block button-assertive" ng-click="login()" type="submit" name="submit">
+                    <span style="color:white">Creer</span>
+                </button>
+            </form>
+            <br>
+            <div style="text-align: center">
+                <p>
+                
+                    <a href="#/app/accueil" style="text-align: center;color: #0a9dc7;font-weight: bolder;">
+                        Se connecter?
+                    </a>
+    
+                </p>
+            </div>
+            
+        </ion-content>
+    </div>
+</ion-view>

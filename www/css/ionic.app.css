@@ -3935,14 +3935,14 @@ a.subdued {
     .bar.bar-stable.bar-footer {
       background-image: linear-gradient(180deg, #b2b2b2, #b2b2b2 50%, transparent 50%); }
   .bar.bar-positive {
-    border-color: #0c60ee;
-    background-color: #387ef5;
-    background-image: linear-gradient(0deg, #0c60ee, #0c60ee 50%, transparent 50%);
+    border-color: #0a9dc7;
+    background-color: #0a9dc7;
+    background-image: linear-gradient(0deg, #0a9dc7, #0a9dc7 50%, transparent 50%);
     color: #fff; }
     .bar.bar-positive .title {
       color: #fff; }
     .bar.bar-positive.bar-footer {
-      background-image: linear-gradient(180deg, #0c60ee, #0c60ee 50%, transparent 50%); }
+      background-image: linear-gradient(180deg, #0a9dc7, #0a9dc7 50%, transparent 50%); }
   .bar.bar-calm {
     border-color: #0a9dc7;
     background-color: #11c1f3;
@@ -3953,14 +3953,14 @@ a.subdued {
     .bar.bar-calm.bar-footer {
       background-image: linear-gradient(180deg, #0a9dc7, #0a9dc7 50%, transparent 50%); }
   .bar.bar-assertive {
-    border-color: #e42112;
-    background-color: #ef473a;
-    background-image: linear-gradient(0deg, #e42112, #e42112 50%, transparent 50%);
+    border-color: #0a9dc7;
+    background-color: #0a9dc7;
+    background-image: linear-gradient(0deg, #0a9dc7, #0a9dc7 50%, transparent 50%);
     color: #fff; }
     .bar.bar-assertive .title {
       color: #fff; }
     .bar.bar-assertive.bar-footer {
-      background-image: linear-gradient(180deg, #e42112, #e42112 50%, transparent 50%); }
+      background-image: linear-gradient(180deg, #0a9dc7, #0a9dc7 50%, transparent 50%); }
   .bar.bar-balanced {
     border-color: #28a54c;
     background-color: #33cd5f;
@@ -8754,14 +8754,14 @@ progress {
         color: #fff; }
   .button.button-assertive {
     border-color: transparent;
-    background-color: #ef473a;
+    background-color: #0a9dc7;
     color: #fff; }
     .button.button-assertive:hover {
       color: #fff;
       text-decoration: none; }
     .button.button-assertive.active, .button.button-assertive.activated {
-      border-color: #a2a2a2;
-      background-color: #e42112; }
+      border-color: #0a9dc7;
+      background-color: #0a9dc7; }
     .button.button-assertive.button-clear {
       border-color: transparent;
       background: none;
@@ -8771,11 +8771,11 @@ progress {
       border-color: transparent;
       background: none; }
     .button.button-assertive.button-outline {
-      border-color: #ef473a;
+      border-color: #0a9dc7;
       background: transparent;
-      color: #ef473a; }
+      color: #0a9dc7; }
       .button.button-assertive.button-outline.active, .button.button-assertive.button-outline.activated {
-        background-color: #ef473a;
+        background-color: #0a9dc7;
         box-shadow: none;
         color: #fff; }
   .button.button-balanced {

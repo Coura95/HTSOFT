@@ -22,48 +22,37 @@
        <!--</div> --> 
       <img src="./img/sgbs1.png" style="width:70%; height: 20%;">
 
-      <p style="margin-top: 50%;">
+      <p style="margin-top: 40%;">
 
         <div>
-          <a href="#/app/login1" class="button button-block button-positive"><i class="icon ion-log-in"></i>{{ 'btn_conn' | translate }}</a>
+          <a href="#/app/login1" class="button button-block button-assertive"><i class="icon ion-log-in"></i>{{ 'btn_conn' | translate }}</a>
           <!--<a ng-show="connectedyet" href="#/app/browse" class="button button-block button-positive"><i class="icon ion-log-in"></i> Bienvenue</a>-->
         </div>
         
       </p>
       <br>
-     <!-- <img src="./img/sgbs1.png" style="width:40%;">-->
+      <p>
+        <!--<div style="text-align: center;color: #0a9dc7;font-weight: bolder;">
+          Créer un compte?
+        </div>-->
+        <a href="#/app/addcompte" style="text-align: center;color: #0a9dc7;font-weight: bolder;" >
+          Créer un compte?
+        </a>
+
+      </p>
+     
     </div> 
     <br/>
     <ion-footer >
-    <div style="text-align: center;margin-top: 100%;color: blue;font-weight: bolder;"> 
+    <div style="text-align: center;margin-top: 80%;color: #0a9dc7;font-weight: bolder;"> 
     <p>
       &copy HTSOFT
       Version beta-1.0
-     
-    </p>
-        
+    </p>       
     </div>
-   <!-- <div style="text-align: center"> 
-        <p>
-          <a  href="#/app/compte">
-            <img style="float: right" src="./img/click.png" >
-          </a>
-          
-        </p>
-        </div>-->
     </ion-footer>
   </ion-content>
 
-  <script id="templates/modal.html" type="text/ng-template">
-    <ion-modal-view>
-      <ion-header-bar class="bar bar-header bar-positive">
-        <h1 class="title">Guide</h1>
-      </ion-header-bar>
-      <ion-content class="bg" >
-        
-      </ion-content>
-    </ion-modal-view>
-  </script>
 </div>
 </ion-pane>
 </ion-view>

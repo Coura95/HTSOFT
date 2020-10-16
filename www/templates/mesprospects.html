@@ -1,35 +1,93 @@
-<ion-view title="{{ 'listprospect_header_page' | translate }}" cache-view="false">
+<ion-view title="Liste point de ventes" cache-view="false">
   <div ng-app="starter">
 
     <ion-content padding="true" class="has-header">
-      <div class="item card ">
-        <input type="text" style="width:88%;float:left" ng-model="motcle" placeholder="{{ 'label_search_prospect' | translate }}...">
-      </div>
+     
+         <!--Test         Pays                       -->
+         <div class="item item-body" ng-if="data.profile=='super'">
+          <button class="button button-block button-assertive"
+            cancel-button="{{ 'fichevisite_select_pv_return' | translate }}"
+            reset-button="{{ 'fichevisite_select_pv_cancel' | translate }}"
+            cancel-search-button="{{ 'fichevisite_select_pv_clear' | translate }}"
+            search-placeholder="{{ 'fichevisite_select_pv_search' | translate }}" modal-select=""
+            ng-model="data.payschoisit" options="listdespays"
+            modal-button-left="{{ 'fichevisite_select_pv_return' | translate }}" option-getter="getOptPays(option)"
+            modal-title="Selection" has-search="true">
+            {{ 'label_choix_pays' | translate }}
+            <div class="option">
+              <h2>{{option.name}}</h2>
 
-      <ion-item ng-if="data.connect" ng-repeat="playlist in mesprospects | filter:motcle">
-        {{ 'label_frequentation_lieu' | translate }}: <span style="float:right">{{playlist.Frequentationdeslieux}}</span><br>
-        {{ 'label_tailledupoint' | translate }}: <span style="float:right">{{playlist.TailleduPoint}}</span><br>
-        {{ 'label_nomprospect' | translate }}: <span style="float:right">{{playlist.Prospect}}</span><br>
-        {{ 'popup_telephone' | translate }}: <span style="float:right">{{playlist.telephone}}</span><br>
-        {{ 'label_interetmanifesteyup' | translate }}: <span style="float:right">{{playlist.InteretmanifestepourYUP}}</span><br>
-        {{ 'fichevisite_presenceconcurence' | translate }}: <span style="float:right">{{playlist.Concurrence}}</span><br>
-        {{ 'label_adresse' | translate }}: <span style="float:right">{{playlist.adresse}}</span><br>
-        {{ 'label_pays' | translate }}: <span style="float:right">{{playlist.Pays}}</span><br>
-        {{ 'label_region_choisi' | translate }}: <span style="float:right">{{playlist.Region}}</span><br>
-        {{ 'label_ville_choisie' | translate }}: <span style="float:right">{{playlist.ville}}</span><br>
-        {{ 'label_date' | translate }}: <span style="float:right">{{playlist.Date | date:'yyyy-MM-dd'}}</span><br>
+            </div>
+
+          </button>
+        </div>
+        <div class="item" style="color: #222222;font-weight: bolder">
+          {{ 'label_pays' | translate }} : <b style="color: blue"
+            ng-if="data.payschoisit!=null">{{data.payschoisit.name}}</b>
+        </div>
+        <!--Test                                -->
+        <!--Test                                -->
+        <!--Test                                -->
+
+        <!--Test         Regions                       -->
+        <div class="item item-body" ng-if="data.payschoisit!=null">
+          <button ng-if="data.payschoisit!=null" class="button button-block button-assertive"
+            cancel-button="{{ 'fichevisite_select_pv_return' | translate }}"
+            reset-button="{{ 'fichevisite_select_pv_cancel' | translate }}"
+            cancel-search-button="{{ 'fichevisite_select_pv_clear' | translate }}"
+            search-placeholder="{{ 'fichevisite_select_pv_search' | translate }}" modal-select=""
+            ng-model="data.regionchoisit" options="listregions" option-getter="getOptRegion(option)"
+            modal-button-left="{{ 'fichevisite_select_pv_return' | translate }}" modal-title="Selection"
+            has-search="true">
+            {{ 'label_choix_region' | translate }}
+            <div class="option">
+              <h2> {{option.name}}</h2>
+            </div>
+          </button>
+        </div>
+        <div ng-if="data.payschoisit!=null" class="item" style="color: #222222;font-weight: bolder">
+          <u ng-if="data.payschoisit!=null">{{ 'label_region_choisi' | translate }} :</u> <b style="color: blue"
+            ng-if="data.regionchoisit!=null">{{data.regionchoisit.name}}</b>
+        </div>
+        <!--Test                                -->
+        <!--Test                                -->
+        <!--Test                                -->
+
+
+        <!--Test       Ville                         -->
+        <div class="item item-body" ng-click="listVillesByRegionID()" ng-if="data.regionchoisit!=null">
+          <button ng-if="data.regionchoisit!=null" class="button button-block button-assertive"
+            cancel-button="{{ 'fichevisite_select_pv_return' | translate }}"
+            reset-button="{{ 'fichevisite_select_pv_cancel' | translate }}"
+            cancel-search-button="{{ 'fichevisite_select_pv_clear' | translate }}"
+            search-placeholder="{{ 'fichevisite_select_pv_search' | translate }}" modal-select=""
+            on-select="lispvPhp()"
+            ng-model="data.villechoisit" options="listvilles" option-getter="getOptVille(option)"
+            modal-button-left="{{ 'fichevisite_select_pv_return' | translate }}" modal-title="Selection"
+            has-search="true">
+            {{ 'label_choix_ville' | translate }}
+            <div class="option">
+              <h2>{{option.name}}</h2>
+
+            </div>
+
+          </button>
+        </div>
+        <div ng-if="data.regionchoisit!=null" class="item" style="color: #222222;font-weight: bolder">
+          <u ng-if="data.regionchoisit!=null">{{ 'label_ville_choisie' | translate }} :</u> <b style="color: blue"
+            ng-if="data.villechoisit!=null">{{data.villechoisit.name}}</b>
+        </div>
+        
+      <ion-item ng-if="data.connect" ng-repeat="playlist in pvs | filter:motcle">
+        Gerant : <span style="float:right">{{playlist.gerant}}</span><br>
+        Telephone gerant: <span style="float:right">{{playlist.telephonegerant}}</span><br>
+        Adresse : <span style="float:right">{{playlist.adresse}}</span><br>
+        Ville: <span style="float:right">{{playlist.ville}}</span><br>
+        Date ajout : <span style="float:right">{{playlist.dateAjout | date:'yyyy-MM-dd'}}</span><br>
 
       </ion-item>
 
-      <ion-item ng-if="!data.connect" ng-repeat="playlist in mesprospectsocal | filter:motcle">
-        {{ 'label_frequentation_lieu' | translate }}:: <span style="float:right">{{playlist.Frequentationdeslieux}}</span><br>
-        {{ 'label_tailledupoint' | translate }}: <span style="float:right">{{playlist.tailledupoint}}</span><br>
-        {{ 'label_interetmanifesteyup' | translate }}: <span style="float:right">{{playlist.InteretmanifestepourYUP}}</span><br>
-        {{ 'fichevisite_presenceconcurence' | translate }}: <span style="float:right">{{playlist.presencedelaconcurrence}}</span><br>
-        {{ 'label_adresse' | translate }}: <span style="float:right">{{playlist.adresse}}</span><br>
-        {{ 'label_ville_choisie' | translate }}: <span style="float:right">{{playlist.ville}}</span><br>
-        {{ 'label_date' | translate }}: <span style="float:right">{{playlist.dateajout | date:'yyyy-MM-dd'}}</span><br>
-      </ion-item>
+
     </ion-content>
   </div>
   </ion-view>

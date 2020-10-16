@@ -374,18 +374,18 @@ angular.module('starter.controllers', ['pascalprecht.translate'])
               // records is the 'server response array' variable name.
               $scope.user_details = res.records; // copy response values to user-details object.
               console.log($scope.user_details);
-            
+
               sessionStorage.setItem('loggedin_id',
-               $scope.user_details.idUtilisateursPointVent);
+                $scope.user_details.idUtilisateursPointVent);
               sessionStorage.setItem('loggedin_name', $scope.user_details.login);
               sessionStorage.setItem('loggedin_password', $scope.user_details.password);
-              sessionStorage.setItem('loggedin_iduser', $scope.user_details.idutilisateurs);
+              sessionStorage.setItem('loggedin_iduser', $scope.user_details.idutilisateur);
               sessionStorage.setItem('loggedin_profil', $scope.user_details.profil);
               console.log($scope.user_details.profil)
               localStorage.setItem('loggedin_id', $scope.user_details.idUtilisateursPointVent);
               localStorage.setItem('loggedin_name', $scope.user_details.login);
               localStorage.setItem('loggedin_password', $scope.user_details.password);
-              localStorage.setItem('loggedin_iduser', $scope.user_details.idutilisateurs);
+              localStorage.setItem('loggedin_iduser', $scope.user_details.idutilisateur);
               localStorage.setItem('loggedin_profil', $scope.user_details.profil);
               localStorage.setItem('isconn', true)
               $ionicHistory.nextViewOptions({
@@ -400,7 +400,7 @@ angular.module('starter.controllers', ['pascalprecht.translate'])
                   });
                 });
               });
-             
+
               $state.transitionTo('app.bienvenue', {}, {
                 reload: true,
                 inherit: true,
@@ -1546,9 +1546,6 @@ angular.module('starter.controllers', ['pascalprecht.translate'])
     $scope.initReg = function () {
       if ($scope.connect == true) {
 
-        $scope.chargerLesRegionsEnLocal();
-        $scope.chargerLesVillesEnLocal();
-
         $ionicLoading.show({
           content: 'Loading',
           animation: 'fade-in',
@@ -1557,49 +1554,71 @@ angular.module('starter.controllers', ['pascalprecht.translate'])
           showDelay: 0,
           duration: 10000
         });
-        if ($scope.data.profile == 'super') {
-          var url = urlPhp.getUrl();
-          $http.get(url + "/pays.php")
-            .success(function (response) {
-              $ionicLoading.hide();
-              $scope.pays = response;
-              localStorage.setItem('paysOnline', angular.toJson($scope.pays));
-              $scope.listdespays = [];
-              for (var i = 0; i < response.length; i++) {
-                var pv = { name: response[i].pays, id: response[i].idpays }
-                $scope.listdespays.push(pv);
-              }
-            }).catch(function (error) {
-              $ionicLoading.hide();
-            });
-          //
+        console.log('Je suis ici')
+        var url = urlPhp.getUrl();
+        $http.get(url + "/pays.php")
+          .success(function (response) {
+            $ionicLoading.hide();
+            //$scope.pays = response;
+            console.log(response)
 
-        } else {
-          //Recuperer la liste des pays
-          var url = urlPhp.getUrl();
-          $http.get(url + "/paysByUser.php?idutilisateurs=" + sessionStorage.getItem('loggedin_iduser'))
-            .success(function (response) {
-              $ionicLoading.hide();
-              $scope.pays = response;
-              localStorage.setItem('paysOnline', angular.toJson($scope.pays));
-
-              $scope.listdespays = [];
-              for (var i = 0; i < response.length; i++) {
-                var pv = { name: response[i].pays, id: response[i].idpays }
-                $scope.listdespays.push(pv);
-              }
-              if ($scope.listdespays.length != 0) {
-                $scope.data.payschoisit = $scope.listdespays[0];
-              }
+            // localStorage.setItem('paysOnline', angular.toJson($scope.pays));
+            $scope.listdespays = [];
+            for (var i = 0; i < response.length; i++) {
+              var pv = { name: response[i].pays, id: response[i].idpays }
+              $scope.listdespays.push(pv);
+            }
+            if ($scope.listdespays.length != 0) {
+              $scope.data.payschoisit = $scope.listdespays[0];
               $scope.listDesregionsByPaysID();
-            }).catch(function (error) {
-              $ionicLoading.hide();
-
-            });
-          //Recuperer la liste des villes
-
-        }
-
+            }
+          }).catch(function (error) {
+            $ionicLoading.hide();
+          });
+        /*    if ($scope.data.profile == 'super') {
+              var url = urlPhp.getUrl();
+              $http.get(url + "/pays.php")
+                .success(function (response) {
+                  $ionicLoading.hide();
+                  $scope.pays = response;
+                  localStorage.setItem('paysOnline', angular.toJson($scope.pays));
+                  $scope.listdespays = [];
+                  for (var i = 0; i < response.length; i++) {
+                    var pv = { name: response[i].pays, id: response[i].idpays }
+                    $scope.listdespays.push(pv);
+                  }
+                }).catch(function (error) {
+                  $ionicLoading.hide();
+                });
+              //
+    
+            } else {
+             
+              //Recuperer la liste des pays
+              var url = urlPhp.getUrl();
+              $http.get(url + "/paysByUser.php?idutilisateurs=" + sessionStorage.getItem('loggedin_iduser'))
+                .success(function (response) {
+                  $ionicLoading.hide();
+                  $scope.pays = response;
+                  localStorage.setItem('paysOnline', angular.toJson($scope.pays));
+    
+                  $scope.listdespays = [];
+                  for (var i = 0; i < response.length; i++) {
+                    var pv = { name: response[i].pays, id: response[i].idpays }
+                    $scope.listdespays.push(pv);
+                  }
+                  if ($scope.listdespays.length != 0) {
+                    $scope.data.payschoisit = $scope.listdespays[0];
+                  }
+                  $scope.listDesregionsByPaysID();
+                }).catch(function (error) {
+                  $ionicLoading.hide();
+    
+                });
+              //Recuperer la liste des villes
+    
+            }
+    */
 
       } else {
         //console.log('eerror connexion')
@@ -1624,6 +1643,7 @@ angular.module('starter.controllers', ['pascalprecht.translate'])
 
       if ($scope.connect == true) {
         //Recuperer la liste des regions
+        console.log($scope.data.payschoisit.id)
         var url = urlPhp.getUrl();
         $http.get(url + "/regionsByPays.php?idpays=" + $scope.data.payschoisit.id)
           .success(function (response) {
@@ -1672,21 +1692,12 @@ angular.module('starter.controllers', ['pascalprecht.translate'])
     $scope.initvar = function () {
       $scope.data.adresse = null
       $scope.data.telephone = null
-      $scope.data.frequentationdeslieux = null
-      $scope.data.prospect = null
-      $scope.data.tailledupoint = null
-      $scope.data.presencedelaconcurrence = null
-      $scope.data.InteretmanifestepourYUP = null
-      $scope.data.frequentationdeslieux = null
+      $scope.data.gerant = null
       $scope.data.latitude = null
       $scope.data.longitude = null
-      $scope.data.regionchoisit = null
       $scope.data.villechoisit = null
-      $scope.data.commentaire = null
-      $scope.data.telephone = null
-      $scope.img = null
-      $scope.images = null
       $scope.data.date = new Date();
+      $scope.data.idutilisateur = localStorage.getItem('loggedin_iduser');;
     }
     $scope.listVillesByRegionID = function () {
       if ($scope.connect == true) {
@@ -2070,12 +2081,7 @@ angular.module('starter.controllers', ['pascalprecht.translate'])
       $scope.checkConnect();
 
       if ($scope.data.adresse == null ||
-        $scope.data.frequentationdeslieux == null ||
-        $scope.data.prospect == null ||
-        $scope.data.tailledupoint == null ||
-        $scope.data.presencedelaconcurrence == null ||
-        $scope.data.InteretmanifestepourYUP == null ||
-        $scope.data.frequentationdeslieux == null ||
+        $scope.data.gerant == null ||
         $scope.data.telephone == null) {
         $translate('alert_header_formulairvide').then(function (header) {
           $translate('alert_content_formulairvide').then(function (content) {
@@ -2094,35 +2100,37 @@ angular.module('starter.controllers', ['pascalprecht.translate'])
       } else {
 
         $scope.value = {
-          prospect: $scope.data.prospect,
-          idregions: $scope.data.villechoisit.id,
-          commentaire: $scope.data.commentaire,
           longitude: $scope.data.longitude,
           latitude: $scope.data.latitude,
           adresse: $scope.data.adresse,
-          frequantationdeslieux: "" + $scope.data.frequentationdeslieux,
-          tailledupoint: $scope.data.tailledupoint,
-          presencedelaconcurrence: $scope.data.presencedelaconcurrence,
-          InteretmanifestepourYUP: $scope.data.InteretmanifestepourYUP,
-          idutilisateurs: sessionStorage.getItem('loggedin_iduser'),
+          gerant: "" + $scope.data.gerant,
+          idutilisateur: localStorage.getItem('loggedin_iduser'),
           ville: $scope.data.villechoisit.id,
           dateajout: $scope.data.date,
           telephone: $scope.data.telephone
         };
         if ($scope.connect == true) {
+          console.log("Objet a envoyer")
+          console.log($scope.value)
           var url = urlPhp.getUrl();
-          var link = url + '/prospect.php';
-          //  $scope.data.latitude = 14.3274633;
-          //  $scope.data.longitude = -17.324723845742;
+          var link = url + '/pointventeccbm.php';
           $ionicLoading.show({ content: 'Loading', animation: 'fade-in', showBackdrop: true, maxWidth: 200, showDelay: 0, duration: 10000 });
           console.log($scope.value)
           $http.post(link, $scope.value)
             .then(function (res) {
               console.log("Retour insert prospect")
               console.log(res)
-              //Inserer l image
               if (res.data == "1") {
-                $scope.insetImage(res.data)
+                $scope.initvar();
+                $ionicPopup.show({
+                  title: "Infos",
+                  template: "Insertion réussit",
+                  scope: $scope,
+                  buttons: [{
+                    text: 'Ok',
+                    type: 'button-positive'
+                  }]
+                });
               }
 
               $ionicLoading.hide();
@@ -2874,6 +2882,7 @@ angular.module('starter.controllers', ['pascalprecht.translate'])
     $scope.size = 0;
     $scope.idregions;
     $scope.data.regionchoisit
+    $scope.data.villechoisit
     $scope.data.cache = true;
     $scope.getOptPays = function (option) {
       // console.log(option)
@@ -2881,16 +2890,20 @@ angular.module('starter.controllers', ['pascalprecht.translate'])
     };
 
 
-    $scope.cacheselect = function(){
-      if($scope.data.cache){
+    $scope.cacheselect = function () {
+      if ($scope.data.cache) {
         $scope.data.cache = false;
-      }else{
+      } else {
         $scope.data.cache = true;
       }
-      
+
     }
     $scope.getOptRegion = function (option) {
       //   console.log($scope.data.regionchoisit)
+      return option;
+    };
+    $scope.getOptVille = function (option) {
+
       return option;
     };
     $scope.testProfile = function () {
@@ -2901,7 +2914,7 @@ angular.module('starter.controllers', ['pascalprecht.translate'])
       $scope.testProfile();
     }
     $scope.checkConnect();
-    $scope.initMap = function(){
+    $scope.initMap = function () {
       var options = {
         timeout: 10000,
         enableHighAccuracy: true
@@ -2945,55 +2958,75 @@ angular.module('starter.controllers', ['pascalprecht.translate'])
         else {
 
           connect = true;
+          var url = urlPhp.getUrl();
+          $http.get(url + "/pays.php")
+            .success(function (response) {
+              // $ionicLoading.hide();
+              console.log(response)
+              pays = response;
 
-          if ($scope.data.profile == 'super') {
-            var url = urlPhp.getUrl();
-            $http.get(url + "/pays.php")
-              .success(function (response) {
-                // $ionicLoading.hide();
-                console.log(response)
-                pays = response;
-
-                $scope.data.listpays = [];
-                for (var i = 0; i < response.length; i++) {
-                  var pv = { name: response[i].pays, id: response[i].idpays, code: response[i].code }
-                  $scope.data.listpays.push(pv);
-                }
-                console.log($scope.data.listpays)
-                localStorage.setItem('paysOnline', angular.toJson($scope.data.listpays));
-              }).catch(function (error) {
-                // $ionicLoading.hide();
-                console.log(error)
-              });
-            //
-          } else {
-            //Recuperer la liste des pays
-            var url = urlPhp.getUrl();
-            $http.get(url + "/paysByUser.php?idutilisateurs=" + sessionStorage.getItem('loggedin_iduser'))
-              .success(function (response) {
-                //  $ionicLoading.hide();
-                pays = response;
-                //  localStorage.setItem('paysOnline', angular.toJson(pays));
-                $scope.data.listpays = [];
-                console.log(response)
-                for (var i = 0; i < response.length; i++) {
-                  var pv = { name: response[i].pays, id: response[i].idpays, code: response[i].code }
-                  $scope.data.listpays.push(pv);
-                }
-                if ($scope.data.listpays.length != 0) {
-                  //  payschoisit = $scope.data.listpays[0];
-                  $scope.data.payschoisit = $scope.data.listpays[0];
-                //  $scope.listpointdevnte();
+              $scope.data.listpays = [];
+              for (var i = 0; i < response.length; i++) {
+                var pv = { name: response[i].pays, id: response[i].idpays, code: response[i].code }
+                $scope.data.listpays.push(pv);
+              }
+              if ($scope.data.listpays.length > 0) {
+                $scope.data.payschoisit = $scope.data.listpays[0];
                 $scope.listDesregionsByPaysID();
-                }
+              }
 
-                console.log($scope.data.payschoisit)
-                // $scope.listDesregionsByPaysID();
-              }).catch(function (error) {
-                // $ionicLoading.hide();
-              });
-            //Recuperer la liste des villes
-          }
+            }).catch(function (error) {
+              // $ionicLoading.hide();
+              console.log(error)
+            });
+          /* if ($scope.data.profile == 'super') {
+             var url = urlPhp.getUrl();
+             $http.get(url + "/pays.php")
+               .success(function (response) {
+                 // $ionicLoading.hide();
+                 console.log(response)
+                 pays = response;
+ 
+                 $scope.data.listpays = [];
+                 for (var i = 0; i < response.length; i++) {
+                   var pv = { name: response[i].pays, id: response[i].idpays, code: response[i].code }
+                   $scope.data.listpays.push(pv);
+                 }
+                 console.log($scope.data.listpays)
+                 localStorage.setItem('paysOnline', angular.toJson($scope.data.listpays));
+               }).catch(function (error) {
+                 // $ionicLoading.hide();
+                 console.log(error)
+               });
+             //
+           } else {
+             //Recuperer la liste des pays
+             var url = urlPhp.getUrl();
+             $http.get(url + "/paysByUser.php?idutilisateurs=" + sessionStorage.getItem('loggedin_iduser'))
+               .success(function (response) {
+                 //  $ionicLoading.hide();
+                 pays = response;
+                 //  localStorage.setItem('paysOnline', angular.toJson(pays));
+                 $scope.data.listpays = [];
+                 console.log(response)
+                 for (var i = 0; i < response.length; i++) {
+                   var pv = { name: response[i].pays, id: response[i].idpays, code: response[i].code }
+                   $scope.data.listpays.push(pv);
+                 }
+                 if ($scope.data.listpays.length != 0) {
+                   //  payschoisit = $scope.data.listpays[0];
+                   $scope.data.payschoisit = $scope.data.listpays[0];
+                   //  $scope.listpointdevnte();
+                   $scope.listDesregionsByPaysID();
+                 }
+ 
+                 console.log($scope.data.payschoisit)
+                 // $scope.listDesregionsByPaysID();
+               }).catch(function (error) {
+                 // $ionicLoading.hide();
+               });
+             //Recuperer la liste des villes
+           }*/
 
         }
       }
@@ -3021,13 +3054,48 @@ angular.module('starter.controllers', ['pascalprecht.translate'])
           });
       }
     }
-    $scope.refreshregion = function(){
-      $scope.initMap();
-      $scope.listregions = null
-      $scope.data.regionchoisit = null
+    $scope.listVillesByRegionID = function () {
+      if ($scope.connect == true) {
+        //Recuperer la liste des villes
+        $scope.refreshville();
+        var url = urlPhp.getUrl();
+        $http.get(url + "/villeByRegion.php?idregion=" + $scope.data.regionchoisit.id)
+          .success(function (response) {
+            $ionicLoading.hide();
+            $scope.ville = response;
+            // localStorage.setItem('villesOnline', angular.toJson($scope.ville));
+            $scope.listvilles = [];
+            for (var i = 0; i < response.length; i++) {
+              var pv = { name: response[i].ville, id: response[i].idville }
+              $scope.listvilles.push(pv);
+            }
+            //    console.log($scope.listvilles)
+          }).catch(function (error) {
+            $ionicLoading.hide();
+          });
+      } else {
+        /*    $scope.ville = []
+            $scope.ville = angular.fromJson(localStorage.getItem('villesOnline'))
+            // console.log($scope.pointvente)
+            $scope.listvilles = [];
+            if ($scope.ville != null) {
+              for (var i = 0; i < $scope.ville.length; i++) {
+                if ($scope.ville[i].idregion == $scope.data.regionchoisit.id) {
+                  var pv = { name: $scope.ville[i].ville, id: $scope.ville[i].idville }
+                  $scope.listvilles.push(pv);
+                }
+    
+              }
+            }*/
+      }
 
     }
-    
+    $scope.refreshville = function () {
+      $scope.initMap();
+      $scope.listvilles = null
+      $scope.data.villechoisit = null
+    }
+
     $scope.listpays();
     $scope.listpointdevnte = function () {
       $scope.pvtempon = [];
@@ -3063,7 +3131,7 @@ angular.module('starter.controllers', ['pascalprecht.translate'])
         if ($scope.pointvente && $scope.pointvente.length > 0) {
           console.log("depart ")
           console.log($scope.pointvente)
-          
+
           $scope.pvv = [];
           $scope.pvvv = [];
           $cordovaGeolocation.getCurrentPosition(options).then(function (position) {
@@ -3148,18 +3216,18 @@ angular.module('starter.controllers', ['pascalprecht.translate'])
       });
 
     }
-   
+
     $scope.listPvPhp = function () {
       var url = urlPhp.getUrl();
       $ionicLoading.show({ content: 'Loading', animation: 'fade-in', showBackdrop: true, maxWidth: 200, showDelay: 0, duration: 10000 });
-      $http.get(url + '/pointventesutilisateurmap.php?idutilisateurs=' + sessionStorage.getItem('loggedin_iduser')+"&idregions="+$scope.data.regionchoisit.id).then(function (res) {
+      $http.get(url + '/pointventesutilisateurmap.php?idville=' + $scope.data.villechoisit.id + "&idutilisateur=" + localStorage.getItem('loggedin_id')).then(function (res) {
         var options = {
           timeout: 10000,
           enableHighAccuracy: true
         };
 
         $scope.pointventes = angular.fromJson(res.data).sort();
-          
+
         $cordovaGeolocation.getCurrentPosition(options).then(function (position) {
 
           var latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
@@ -3192,7 +3260,7 @@ angular.module('starter.controllers', ['pascalprecht.translate'])
               });
 
               var infoWindow = new google.maps.InfoWindow({
-                content: "Point: " + pv.client + "<br/>Code: " + pv.codePointVente + "<br/>Telephone: " + pv.telephone + "<br/>Longitude: " + pv.longitude + "<br/>Latitude: " + pv.latitude
+                content: "Point: " + pv.gerant + "<br/>Telephone: " + pv.telephonegerant + "<br/>Longitude: " + pv.longitude + "<br/>Latitude: " + pv.latitude
               });
 
               google.maps.event.addListener(marker, 'click', function () {
@@ -3207,7 +3275,13 @@ angular.module('starter.controllers', ['pascalprecht.translate'])
       });
     }
   })
-  .controller('MesprospectsCtrl', function ($scope, $http, $ionicLoading, ChekConnect, $ionicPopup, $translate, urlPhp) {
+  .controller('MesprospectsCtrl', function ($scope,
+    $http, $ionicLoading, ChekConnect,
+    $ionicPopup, $translate, urlPhp) {
+      $scope.data = {};
+    $scope.data.regionchoisit = null;
+    $scope.data.villechoisit = null;
+    $scope.data.payschoisit = null;
     $scope.connect = null;
     $scope.data = {};
     //Tester la connectiviteee
@@ -3215,28 +3289,22 @@ angular.module('starter.controllers', ['pascalprecht.translate'])
       $scope.connect = ChekConnect.getConnectivite();
     }
     //Tester la connectiviteee
+    $scope.getOptPays = function (option) {
+
+      return option;
+    };
+    $scope.getOptVille = function (option) {
+
+      return option;
+    };
+    $scope.getOptRegion = function (option) {
+
+      return option;
+    };
     $scope.checkConnect();
     if ($scope.connect == true) {
       $scope.data.connect = true;
-      $ionicLoading.show({ content: 'Loading', animation: 'fade-in', showBackdrop: true, maxWidth: 200, showDelay: 0, duration: 3000 });
-      var url = urlPhp.getUrl();
-      $http.get(url + "/mesprospects.php?idutilisateurs=" + sessionStorage.getItem('loggedin_iduser'))
-        .success(function (response) {
-          $ionicLoading.hide();
-          var inverse = []
-          var taille = response.length - 1
-          for (var i = taille; i >= 0; i--) {
-            inverse.push(response[i])
-            console.log(response[i].Date)
-          }
-          console.log(inverse)
-          $scope.synchronDataLocalProspect()
-          $scope.mesprospects = inverse;
-          console.log($scope.mesprospects);
-        }).catch(function (error) {
-          $ionicLoading.hide();
-          alert(error);
-        });
+     
     } else {
       $scope.data.connect = false;
       $translate('alert_header_ofline').then(function (header) {
@@ -3279,98 +3347,167 @@ angular.module('starter.controllers', ['pascalprecht.translate'])
       });
 
     }
+    $scope.initReg = function () {
+      if ($scope.connect == true) {
 
-    //Gerer les donnees locales: Synchronisation
+        $ionicLoading.show({
+          content: 'Loading',
+          animation: 'fade-in',
+          showBackdrop: true,
+          maxWidth: 200,
+          showDelay: 0,
+          duration: 10000
+        });
+        console.log('Je suis ici')
+        var url = urlPhp.getUrl();
+        $http.get(url + "/pays.php")
+          .success(function (response) {
+            $ionicLoading.hide();
+            //$scope.pays = response;
+            console.log(response)
 
-    $scope.synchronDataLocalProspect = function () {
-      //  $ionicLoading.show({ content: 'Tentative de synchronisation', animation: 'fade-in', showBackdrop: true, maxWidth: 800, showDelay: 0, timeout: 10000 });
-      var flocal = angular.fromJson(localStorage.getItem('prospectsSauvegarde'));
-      if (flocal.length == 0) {
-        console.log('Pas de donnees locales')
-        //  $ionicLoading.hide();
+            // localStorage.setItem('paysOnline', angular.toJson($scope.pays));
+            $scope.listdespays = [];
+            for (var i = 0; i < response.length; i++) {
+              var pv = { name: response[i].pays, id: response[i].idpays }
+              $scope.listdespays.push(pv);
+            }
+            if ($scope.listdespays.length != 0) {
+              $scope.data.payschoisit = $scope.listdespays[0];
+              $scope.listDesregionsByPaysID();
+            }
+          }).catch(function (error) {
+            $ionicLoading.hide();
+          });
+
       } else {
-        //  var echec = [];
-
-        $translate('header_title_synchrone').then(function (header) {
-          $translate('content_label_synchrone').then(function (content) {
-            $translate('content_label_synchrone_nb_fiche').then(function (nb) {
-              $translate('content_label_synchrone_nb_suggetion').then(function (sugest) {
-                var echec = [];
-                $ionicPopup.show({
-                  title: header,
-                  template: content + "<br/>" + nb + flocal.length + "<br/>" + sugest,
-                  scope: $scope,
-                  buttons: [
-                    {
-                      text: 'OK',
-                      type: 'button-energized',
-                      onTap: function (e) {
-                        return true;
-                      }
-                    }]
-                }).then(function (result) {
-                  if (!result) {
-
-                  } else {
-                    // console.log(flocal[0])
-                    var url = urlPhp.getUrl();
-                    $ionicLoading.show({ content: 'Tentative de synchronisation', animation: 'fade-in', showBackdrop: true, maxWidth: 800, showDelay: 0, timeout: 3000 });
-                    for (var i = 0; i < flocal.length; i++) {
-                      $http.post(url + '/prospect.php', flocal[i]).then(function (res) {
-                        console.log('index :' + i + " " + res.data)
-                      }).catch(function (error) {
-                        echec.push(flocal[i])
-                        console.log('echoue')
-                        $ionicLoading.hide();
-                        alert('Synchro echouée');
-                      });
-                    }
-                    console.log('Taille apres la boucle')
-                    console.log(echec)
-                    $ionicLoading.hide();
-
-                    if (echec.length == 0) {
-                      var init = [];
-                      console.log('tout est envoyé')
-                      $translate('alert_header_reussi').then(function (header) {
-                        $translate('alert_content_reussi').then(function (content) {
-                          $ionicPopup.confirm({
-                            title: header,
-                            content: content,
-                            buttons: [
-                              {
-                                text: 'OK',
-                                type: 'button-energized',
-                                onTap: function (e) {
-                                  return true;
-                                }
-                              }]
-                          })
-                            .then(function (result) {
-                              if (result) {
-                                localStorage.setItem('prospectsSauvegarde', angular.toJson(init))
-                              } else {
-                                localStorage.setItem('prospectsSauvegarde', angular.toJson(init))
-                              }
-                            });
-                        })
-                      })
-
-
-                    } else {
-                      console.log('Taille s il ya erreur')
-                      console.log(echec)
-                      localStorage.setItem('prospectsSauvegarde', angular.toJson(echec))
-                    }
-                  }
-                })
-              })
-            })
-          })
-        })
-
+        //console.log('eerror connexion')
+        $scope.pays = []
+        $scope.pays = angular.fromJson(localStorage.getItem('paysOnline'))
+        // console.log($scope.pointvente)
+        $scope.listdespays = [];
+        if ($scope.pays != null) {
+          for (var i = 0; i < $scope.pays.length; i++) {
+            var pv = { name: $scope.pays[i].pays, id: $scope.pays[i].idpays }
+            $scope.listdespays.push(pv);
+          }
+        }
+        if ($scope.data.profile == 'limite') {
+          $scope.data.payschoisit = $scope.listdespays[0]
+        }
+        $scope.listDesregionsByPaysID();
       }
     }
+
+    $scope.listDesregionsByPaysID = function () {
+
+      if ($scope.connect == true) {
+        //Recuperer la liste des regions
+        console.log($scope.data.payschoisit.id)
+        var url = urlPhp.getUrl();
+        $http.get(url + "/regionsByPays.php?idpays=" + $scope.data.payschoisit.id)
+          .success(function (response) {
+            $ionicLoading.hide();
+            $scope.region = response;
+            //  localStorage.setItem('regionsOnline', angular.toJson($scope.region));
+            $scope.listregions = [];
+            for (var i = 0; i < response.length; i++) {
+              var pv = { name: response[i].region, id: response[i].idregion }
+              $scope.listregions.push(pv);
+            }
+
+          }).catch(function (error) {
+            $ionicLoading.hide();
+
+          });
+      } else {
+        $scope.region = []
+        $scope.region = angular.fromJson(localStorage.getItem('regionsOnline'))
+        // console.log($scope.pointvente)
+        $scope.listregions = [];
+        if ($scope.data.profile == 'super') {
+          //   $scope.listregions =  $scope.region;
+          for (var i = 0; i < $scope.region.length; i++) {
+
+            var pv = { name: $scope.region[i].region, id: $scope.region[i].idregion }
+            $scope.listregions.push(pv);
+
+
+          }
+        } else {
+
+          if ($scope.region != null) {
+            for (var i = 0; i < $scope.region.length; i++) {
+              if ($scope.region[i].idpays == $scope.data.payschoisit.id) {
+                var pv = { name: $scope.region[i].region, id: $scope.region[i].idregion }
+                $scope.listregions.push(pv);
+              }
+
+            }
+          }
+        }
+      }
+
+    }
+    $scope.listVillesByRegionID = function () {
+      if ($scope.connect == true) {
+        //Recuperer la liste des villes
+        var url = urlPhp.getUrl();
+        $http.get(url + "/villeByRegion.php?idregion=" + $scope.data.regionchoisit.id)
+          .success(function (response) {
+            $ionicLoading.hide();
+            $scope.ville = response;
+            // localStorage.setItem('villesOnline', angular.toJson($scope.ville));
+            $scope.listvilles = [];
+            for (var i = 0; i < response.length; i++) {
+              var pv = { name: response[i].ville, id: response[i].idville }
+              $scope.listvilles.push(pv);
+            }
+            
+          }).catch(function (error) {
+            $ionicLoading.hide();
+          });
+      } else {
+        $scope.ville = []
+        $scope.ville = angular.fromJson(localStorage.getItem('villesOnline'))
+        // console.log($scope.pointvente)
+        $scope.listvilles = [];
+        if ($scope.ville != null) {
+          for (var i = 0; i < $scope.ville.length; i++) {
+            if ($scope.ville[i].idregion == $scope.data.regionchoisit.id) {
+              var pv = { name: $scope.ville[i].ville, id: $scope.ville[i].idville }
+              $scope.listvilles.push(pv);
+            }
+
+          }
+        }
+      }
+
+    }
+    $scope.initReg();
+  $scope.lispvPhp = function(){
+    $ionicLoading.show({ content: 'Loading', animation: 'fade-in', showBackdrop: true, maxWidth: 200, showDelay: 0, duration: 3000 });
+    var url = urlPhp.getUrl();
+    $http.get(url + "/pointventesutilisateur.php?idville="+ $scope.data.villechoisit.id+"&idutilisateur=" + localStorage.getItem('loggedin_iduser'))
+      .success(function (response) {
+        $ionicLoading.hide();
+        console.log(response)
+        $scope.pvs = response;
+     /*   var inverse = []
+        var taille = response.length - 1
+        for (var i = taille; i >= 0; i--) {
+          inverse.push(response[i])
+          console.log(response[i].Date)
+        }
+        console.log(inverse)
+        $scope.synchronDataLocalProspect()
+        $scope.mesprospects = inverse;
+        console.log($scope.mesprospects);*/
+      }).catch(function (error) {
+        $ionicLoading.hide();
+        alert(error);
+      });
+  }
 
   })
   .factory('ChekConnect', function () {
@@ -3395,9 +3532,9 @@ angular.module('starter.controllers', ['pascalprecht.translate'])
 
     return {
       getUrl: function () {
-        return "http://192.168.0.124/webservice";
-      //  return "http://mob-test.yosard.com/webservice";
-       // return "http://mob.yosard.com:89/webservice";
+        return "http://htsoftdemo.com/apiccbm";
+        //  return "http://mob-test.yosard.com/webservice";
+        // return "http://mob.yosard.com:89/webservice";
       }
     }
   })
@@ -3407,7 +3544,7 @@ angular.module('starter.controllers', ['pascalprecht.translate'])
     return {
       getUrl: function () {
         return "http://v-beta.yosard.com:8080/yup/rest";
-       // return "http://www.yosard.com:8080/yup/rest";
+        // return "http://www.yosard.com:8080/yup/rest";
       }
     }
   })
@@ -3425,6 +3562,116 @@ angular.module('starter.controllers', ['pascalprecht.translate'])
         }
         return profil;
       }
+    }
+  })
+  .controller('AddcompteCtrl', function ($scope,
+    $http,
+    $ionicLoading,
+    $ionicPopup,
+    $cordovaGeolocation,
+    ChekConnect,
+    $translate,
+    $cordovaCamera,
+    $ionicModal,
+    ProfilUser,
+    urlPhp,
+    urlJava,
+    $ionicHistory,
+    $translate,
+    $state) {
+    $scope.user = {}
+    console.log('creation de compte');
+    $scope.initvar = function () {
+      $scope.user.nom = '';
+      $scope.user.prenom = '';
+      $scope.user.telephone = '';
+      $scope.user.adresse = '';
+      $scope.user.email = '';
+      $scope.user.password = '';
+      $scope.user.passwordconfirm = '';
+    }
+    $scope.initvar();
+    $scope.login = function () {
+
+      if ($scope.user.nom !== '' &&
+        $scope.user.prenom !== '' &&
+        $scope.user.telephone !== '' &&
+        $scope.user.adresse !== '' &&
+        $scope.user.email !== '' &&
+        $scope.user.password !== '' &&
+        $scope.user.passwordconfirm !== ''
+      ) {
+        if ($scope.user.password == $scope.user.passwordconfirm) {
+          console.log($scope.user);
+          $scope.user.profil = 'Administrateur';
+          $scope.user.dateajout = new Date()
+
+          var url = urlPhp.getUrl();
+          var link = url + '/utilisateur.php';
+          $ionicLoading.show({ content: 'Loading', animation: 'fade-in', showBackdrop: true, maxWidth: 200, showDelay: 0, duration: 10000 });
+          console.log($scope.user)
+          $http.post(link, $scope.user)
+            .then(function (res) {
+              console.log(res)
+              if (res.data !== "error") {
+                //     $scope.showDialog('Infos', 'reussi')
+                sessionStorage.setItem('loggedin_name', $scope.user.email);
+                sessionStorage.setItem('loggedin_password', $scope.user.password);
+                sessionStorage.setItem('loggedin_iduser', res.data);
+                sessionStorage.setItem('loggedin_profil', 'Agent recenseur');
+
+
+                localStorage.setItem('loggedin_name', $scope.user.email);
+                localStorage.setItem('loggedin_password', $scope.user.password);
+                localStorage.setItem('loggedin_iduser', res.data);
+                localStorage.setItem('loggedin_profil', 'Agent recenseur');
+                localStorage.setItem('isconn', true)
+                $ionicHistory.nextViewOptions({
+                  disableAnimate: true,
+                  disableBack: true
+                });
+                $translate('alert_connexion_reussi_header').then(function (header) {
+                  $translate('alert_connexion_reussi_content').then(function (content) {
+                    var alertPopup = $ionicPopup.alert({
+                      title: header,
+                      template: content + $scope.user.email + ' !'
+                    });
+                  });
+                });
+
+                $state.transitionTo('app.bienvenue', {}, {
+                  reload: true,
+                  inherit: true,
+                  notify: true
+                });
+              } else {
+                $scope.showDialog('erreur', 'echec')
+              }
+
+              $ionicLoading.hide();
+
+            }).catch(function (error) {
+              console.log(error)
+              $ionicLoading.hide();
+              alert(error);
+            });
+        } else {
+          $scope.showDialog('erreur', 'Les mots de passe ne sont pas conformes')
+        }
+      } else {
+        $scope.showDialog('erreur', 'Remplire tout le formulaire')
+      }
+    }
+    $scope.showDialog = function (header, content) {
+      $ionicPopup.show({
+        title: header,
+        template: content,
+        scope: $scope,
+        buttons: [{
+          text: 'Ok',
+          type: 'button-positive'
+        }]
+      });
     }
   })
   .factory('ListpaysByProfil', function ($http, urlPhp) {
